@@ -333,6 +333,21 @@
   .td-month-progress{ font-size:13.5px; color:var(--text-lo); }
   .td-month-body{ padding:8px 0 4px 4px; display:flex; flex-direction:column; gap:7px; }
 
+  /* ================ NHẬT KÝ VIỆC TỐT ================ */
+  .gd-day-group{ margin-top:16px; }
+  .gd-day-head{ font-size:13.5px; font-weight:700; color:var(--text-lo); margin-bottom:8px; padding-left:2px; }
+  .gd-item{ display:flex; align-items:center; gap:10px; padding:11px 13px; border-radius:12px; background:var(--glass-strong); font-size:15.5px; margin-bottom:7px; }
+  .gd-item .gd-text{ flex:1; }
+  .gd-item .gd-del{ background:none; border:none; color:var(--text-lo); cursor:pointer; font-size:15px; opacity:0; flex-shrink:0; }
+  .gd-item:hover .gd-del{ opacity:1; }
+  .ct-item{ display:flex; align-items:center; gap:10px; padding:11px 13px; border-radius:12px; background:var(--glass-strong); font-size:15px; margin-bottom:7px; }
+  .ct-item .ct-cat{ font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:100px; background:var(--accent); color:#fff; flex-shrink:0; }
+  .ct-item .ct-text{ flex:1; }
+  .ct-item .ct-amount{ font-weight:700; color:var(--text-hi); flex-shrink:0; }
+  .ct-item .ct-date{ font-size:12.5px; color:var(--text-lo); flex-shrink:0; }
+  .ct-item .ct-del{ background:none; border:none; color:var(--text-lo); cursor:pointer; font-size:15px; opacity:0; flex-shrink:0; }
+  .ct-item:hover .ct-del{ opacity:1; }
+
 </style>
 </head>
 <body data-mode="focus">
@@ -349,6 +364,7 @@
       <button class="nav-tab" data-tab="tabStats">📊 Thống Kê Hiệu Quả</button>
       <button class="nav-tab" data-tab="tabWeight">⚖️ Kiểm Soát Cân Nặng</button>
       <button class="nav-tab" data-tab="tabTamDao">🙏 Tâm Đạo</button>
+      <button class="nav-tab" data-tab="tabGoodDeeds">🌱 Nhật Ký Việc Tốt</button>
     </nav>
     <div class="pill"><span class="dot"></span><span id="syncStatusPill">Đang lưu...</span></div>
     <button class="btn btn-sm" id="openBackup">💾 Sao lưu</button>
@@ -815,6 +831,68 @@
     <div id="tdFullList" style="max-height:640px; overflow-y:auto;"></div>
   </div>
 
+
+</div>
+</section>
+
+<section id="tabGoodDeeds" class="tab-section">
+<div class="shell">
+
+  <div class="stats-grid" style="grid-template-columns:repeat(2,1fr);">
+    <div class="glass stat-card accent">
+      <div class="stat-label">Tổng việc tốt đã làm</div>
+      <div class="stat-value" id="gdTotalCount">0</div>
+      <div class="stat-sub">việc</div>
+    </div>
+    <div class="glass stat-card">
+      <div class="stat-label">Tổng tiền Phóng sinh &amp; TPTN</div>
+      <div class="stat-value" id="gdTotalMoney">0</div>
+      <div class="stat-sub">VNĐ</div>
+    </div>
+  </div>
+
+  <div class="glass panel" style="margin-bottom:18px;">
+    <h2><span class="t">🌱 Nhật ký việc tốt hằng ngày</span></h2>
+    <div class="field" style="display:flex; gap:10px; align-items:flex-end;">
+      <div style="flex:0 0 160px;">
+        <label>Ngày</label>
+        <input type="date" id="gdDate">
+      </div>
+      <div style="flex:1;">
+        <label>Việc tốt đã làm</label>
+        <input type="text" id="gdText" placeholder="VD: Giúp đỡ người lạ qua đường">
+      </div>
+      <button class="btn btn-primary" id="gdAddBtn" style="height:52px;">+ Thêm</button>
+    </div>
+    <div id="gdList"></div>
+  </div>
+
+  <div class="glass panel">
+    <h2><span class="t">🕊️ Từ thiện &amp; Phóng sinh</span></h2>
+    <div class="field" style="display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap;">
+      <div style="flex:0 0 160px;">
+        <label>Ngày</label>
+        <input type="date" id="ctDate">
+      </div>
+      <div style="flex:1; min-width:180px;">
+        <label>Làm việc gì</label>
+        <input type="text" id="ctText" placeholder="VD: Mua cá phóng sinh ở chùa">
+      </div>
+      <div style="flex:0 0 150px;">
+        <label>Phân loại</label>
+        <select id="ctCategory">
+          <option value="Phóng sinh">Phóng sinh</option>
+          <option value="TPTN">TPTN</option>
+        </select>
+      </div>
+      <div style="flex:0 0 140px;">
+        <label>Số tiền (VNĐ)</label>
+        <input type="text" id="ctAmount" placeholder="VD: 200000">
+      </div>
+      <button class="btn btn-primary" id="ctAddBtn" style="height:52px;">+ Thêm</button>
+    </div>
+    <div id="ctList"></div>
+  </div>
 
 </div>
 </section>
@@ -1698,6 +1776,7 @@ document.querySelectorAll('.nav-tab').forEach(btn=>{
     if(btn.dataset.tab === 'tabStats') renderStats();
     if(btn.dataset.tab === 'tabWeight' && window.renderWeightTab) window.renderWeightTab();
     if(btn.dataset.tab === 'tabTamDao' && window.renderTamDao) window.renderTamDao();
+    if(btn.dataset.tab === 'tabGoodDeeds' && window.renderGoodDeeds) window.renderGoodDeeds();
   });
 });
 
@@ -1729,6 +1808,7 @@ document.querySelectorAll('.nav-tab').forEach(btn=>{
       planner: window.__planner ? window.__planner.exportData() : null,
       weight: window.__weight ? window.__weight.exportData() : null,
       tamdao: window.__tamdao ? window.__tamdao.exportData() : null,
+      gooddeeds: window.__gooddeeds ? window.__gooddeeds.exportData() : null,
     };
   }
 
@@ -1750,6 +1830,7 @@ document.querySelectorAll('.nav-tab').forEach(btn=>{
     if(data.planner && window.__planner) window.__planner.importData(data.planner);
     if(data.weight && window.__weight) window.__weight.importData(data.weight);
     if(data.tamdao && window.__tamdao) window.__tamdao.importData(data.tamdao);
+    if(data.gooddeeds && window.__gooddeeds) window.__gooddeeds.importData(data.gooddeeds);
   }
 
   document.getElementById('doImportBtn').addEventListener('click', ()=>{
@@ -2494,6 +2575,125 @@ Hãy giúp tôi:
     }
   };
   renderAll();
+})();
+
+// ================= NHẬT KÝ VIỆC TỐT =================
+(function(){
+  function isoDate(d){ return d.toISOString().slice(0,10); }
+  function todayIso(){ return isoDate(new Date()); }
+  function formatVN(iso){ const [y,m,d]=iso.split('-'); return `${d}/${m}/${y}`; }
+  function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function num(v){ const n = parseFloat(String(v).replace(/[.,\s]/g,'')); return isNaN(n) ? 0 : n; }
+
+  let goodDeeds = [];  // {id, date, text}
+  let charityLog = []; // {id, date, category, text, amount}
+  let gdSeq = 1, ctSeq = 1;
+
+  function toastG(text, icon){
+    const host = document.getElementById('toastHost');
+    const el = document.createElement('div');
+    el.className = 'glass toast';
+    el.innerHTML = `<span class="t-ic">${icon||'🌱'}</span><span>${text}</span>`;
+    host.appendChild(el);
+    setTimeout(()=>{ el.style.opacity='0'; el.style.transition='opacity .4s ease'; setTimeout(()=>el.remove(),400); }, 3400);
+  }
+
+  document.getElementById('gdDate').value = todayIso();
+  document.getElementById('ctDate').value = todayIso();
+
+  // ---------- Việc tốt hằng ngày ----------
+  function renderGoodDeedsList(){
+    const wrap = document.getElementById('gdList');
+    document.getElementById('gdTotalCount').textContent = goodDeeds.length;
+    if(goodDeeds.length===0){ wrap.innerHTML = '<div class="empty-hint" style="margin-top:14px;">Chưa có việc tốt nào được ghi lại — bắt đầu ngay hôm nay nhé.</div>'; return; }
+
+    const groups = {};
+    [...goodDeeds].sort((a,b)=>b.date.localeCompare(a.date)).forEach(it=>{
+      (groups[it.date] = groups[it.date] || []).push(it);
+    });
+    wrap.innerHTML = '';
+    Object.keys(groups).sort().reverse().forEach(date=>{
+      const dayItems = groups[date];
+      const section = document.createElement('div');
+      section.className = 'gd-day-group';
+      section.innerHTML = `<div class="gd-day-head">${formatVN(date)} · ${dayItems.length} việc tốt</div>`;
+      dayItems.forEach(it=>{
+        const row = document.createElement('div');
+        row.className = 'gd-item';
+        row.innerHTML = `<span class="gd-text">${escapeHtml(it.text)}</span><button class="gd-del">✕</button>`;
+        row.querySelector('.gd-del').addEventListener('click', ()=>{
+          goodDeeds = goodDeeds.filter(x=>x.id!==it.id);
+          renderGoodDeedsList();
+        });
+        section.appendChild(row);
+      });
+      wrap.appendChild(section);
+    });
+  }
+  document.getElementById('gdAddBtn').addEventListener('click', ()=>{
+    const date = document.getElementById('gdDate').value || todayIso();
+    const text = document.getElementById('gdText').value.trim();
+    if(!text){ toastG('Nhập việc tốt bạn đã làm nhé.', '⚠'); return; }
+    goodDeeds.push({ id:'gd'+(gdSeq++), date, text });
+    document.getElementById('gdText').value = '';
+    renderGoodDeedsList();
+    toastG('Đã ghi nhận việc tốt. Tốt lắm! 🌱', '🌱');
+  });
+
+  // ---------- Từ thiện & Phóng sinh ----------
+  function renderCharityList(){
+    const wrap = document.getElementById('ctList');
+    const total = charityLog.reduce((s,x)=>s+x.amount, 0);
+    document.getElementById('gdTotalMoney').textContent = total.toLocaleString('vi-VN');
+    if(charityLog.length===0){ wrap.innerHTML = '<div class="empty-hint" style="margin-top:14px;">Chưa có mục nào được ghi lại.</div>'; return; }
+
+    const sorted = [...charityLog].sort((a,b)=>b.date.localeCompare(a.date));
+    wrap.innerHTML = '';
+    sorted.forEach(it=>{
+      const row = document.createElement('div');
+      row.className = 'ct-item';
+      row.innerHTML = `
+        <span class="ct-cat">${escapeHtml(it.category)}</span>
+        <span class="ct-text">${escapeHtml(it.text)}</span>
+        <span class="ct-amount">${it.amount.toLocaleString('vi-VN')} đ</span>
+        <span class="ct-date">${formatVN(it.date)}</span>
+        <button class="ct-del">✕</button>`;
+      row.querySelector('.ct-del').addEventListener('click', ()=>{
+        charityLog = charityLog.filter(x=>x.id!==it.id);
+        renderCharityList();
+      });
+      wrap.appendChild(row);
+    });
+  }
+  document.getElementById('ctAddBtn').addEventListener('click', ()=>{
+    const date = document.getElementById('ctDate').value || todayIso();
+    const text = document.getElementById('ctText').value.trim();
+    const category = document.getElementById('ctCategory').value;
+    const amount = num(document.getElementById('ctAmount').value);
+    if(!text){ toastG('Nhập bạn đã làm việc gì nhé.', '⚠'); return; }
+    if(amount<=0){ toastG('Nhập số tiền hợp lệ nhé.', '⚠'); return; }
+    charityLog.push({ id:'ct'+(ctSeq++), date, category, text, amount });
+    document.getElementById('ctText').value = '';
+    document.getElementById('ctAmount').value = '';
+    renderCharityList();
+    toastG('Đã ghi nhận. Công đức viên mãn 🕊️', '🕊️');
+  });
+
+  function renderAllGD(){ renderGoodDeedsList(); renderCharityList(); }
+
+  window.renderGoodDeeds = renderAllGD;
+  window.__gooddeeds = {
+    exportData(){ return { goodDeeds, charityLog }; },
+    importData(d){
+      goodDeeds = Array.isArray(d.goodDeeds) ? d.goodDeeds : [];
+      charityLog = Array.isArray(d.charityLog) ? d.charityLog : [];
+      const maxG = goodDeeds.reduce((m,it)=>{ const n=parseInt(String(it.id).replace('gd',''),10); return isNaN(n)?m:Math.max(m,n); }, 0);
+      const maxC = charityLog.reduce((m,it)=>{ const n=parseInt(String(it.id).replace('ct',''),10); return isNaN(n)?m:Math.max(m,n); }, 0);
+      gdSeq = maxG+1; ctSeq = maxC+1;
+      renderAllGD();
+    }
+  };
+  renderAllGD();
 })();
 
 // ================= ĐĂNG KÝ SERVICE WORKER (cài đặt PWA + chạy offline) =================
