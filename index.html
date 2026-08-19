@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flow — Digital Workspace & Kế Hoạch</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="theme-color" content="#6E2A3A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Flow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -344,7 +350,7 @@
       <button class="nav-tab" data-tab="tabWeight">⚖️ Kiểm Soát Cân Nặng</button>
       <button class="nav-tab" data-tab="tabTamDao">🙏 Tâm Đạo</button>
     </nav>
-    <div class="pill"><span class="dot"></span> Tự động lưu trên máy này</div>
+    <div class="pill"><span class="dot"></span><span id="syncStatusPill">Đang lưu...</span></div>
     <button class="btn btn-sm" id="openBackup">💾 Sao lưu</button>
   </div>
 </div>
@@ -1857,7 +1863,10 @@ document.querySelectorAll('.nav-tab').forEach(btn=>{
     try{
       const data = collectAllData();
       await db.collection('users').doc(fbUser.uid).set(data);
-      setSyncStatus('Đã đồng bộ lúc ' + new Date().toLocaleTimeString('vi-VN'));
+      const ts = 'Đã đồng bộ lúc ' + new Date().toLocaleTimeString('vi-VN');
+      setSyncStatus(ts);
+      const pill = document.getElementById('syncStatusPill');
+      if(pill) pill.textContent = '☁️ ' + ts;
       if(!silent) toastB('Đã tải dữ liệu lên đám mây.', '☁️');
     }catch(err){
       if(!silent){ setSyncStatus(''); toastB('Lỗi tải lên: ' + err.message, '⚠'); }
@@ -1889,22 +1898,32 @@ document.querySelectorAll('.nav-tab').forEach(btn=>{
   // ---------- TỰ ĐỘNG LƯU (localStorage của trình duyệt + đồng bộ ngầm Firebase) ----------
   const AUTOSAVE_KEY = 'flow_autosave_v1';
 
+  function nowVN(){ return new Date().toLocaleTimeString('vi-VN'); }
+  function updatePillStatus(text){
+    const el = document.getElementById('syncStatusPill');
+    if(el) el.textContent = text;
+  }
+
   function saveLocalAutosave(){
-    try{ localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(collectAllData())); }catch(e){}
+    try{
+      localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(collectAllData()));
+      updatePillStatus('Đã lưu trên máy lúc ' + nowVN());
+    }catch(e){}
   }
   function restoreLocalAutosave(){
     try{
       const raw = localStorage.getItem(AUTOSAVE_KEY);
-      if(!raw) return;
+      if(!raw){ saveLocalAutosave(); return; }
       applyImportedData(JSON.parse(raw));
       toastB('Đã khôi phục dữ liệu từ lần dùng trước trên máy này.', '🔄');
+      saveLocalAutosave();
     }catch(e){}
   }
   setTimeout(restoreLocalAutosave, 0); // hoãn tới khi mọi module (kể cả các module định nghĩa sau IIFE này) đã sẵn sàng
 
   function autosaveTick(){
     saveLocalAutosave();
-    if(fbUser && db) pushToCloud(true); // đồng bộ ngầm lên Firebase nếu đã đăng nhập, không hiện toast
+    if(fbUser && db) pushToCloud(true); // đồng bộ ngầm lên Firebase nếu đã đăng nhập, không hiện toast — cập nhật pill sau, ghi đè dòng "đã lưu trên máy" bằng dòng "đã đồng bộ"
   }
   setInterval(autosaveTick, 8000);
   window.addEventListener('beforeunload', saveLocalAutosave);
@@ -2476,6 +2495,13 @@ Hãy giúp tôi:
   };
   renderAll();
 })();
+
+// ================= ĐĂNG KÝ SERVICE WORKER (cài đặt PWA + chạy offline) =================
+if('serviceWorker' in navigator){
+  window.addEventListener('load', ()=>{
+    navigator.serviceWorker.register('service-worker.js').catch(()=>{});
+  });
+}
 
 </script>
 </body>
