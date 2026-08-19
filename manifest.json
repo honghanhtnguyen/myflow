@@ -1,0 +1,16 @@
+{
+  "name": "Flow",
+  "short_name": "Flow",
+  "description": "Ứng dụng năng suất cá nhân: Digital Workspace, Kanban & Lịch, Thống kê, Kiểm soát cân nặng, Tâm Đạo.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F7F1E7",
+  "theme_color": "#6E2A3A",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
