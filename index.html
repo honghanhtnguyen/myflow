@@ -344,7 +344,7 @@
       <button class="nav-tab" data-tab="tabWeight">⚖️ Kiểm Soát Cân Nặng</button>
       <button class="nav-tab" data-tab="tabTamDao">🙏 Tâm Đạo</button>
     </nav>
-    <div class="pill warn"><span class="dot"></span> Chế độ thử — dữ liệu chưa được lưu lại</div>
+    <div class="pill"><span class="dot"></span> Tự động lưu trên máy này</div>
     <button class="btn btn-sm" id="openBackup">💾 Sao lưu</button>
   </div>
 </div>
@@ -1851,17 +1851,16 @@ document.querySelectorAll('.nav-tab').forEach(btn=>{
     if(el) el.textContent = text;
   }
 
-  async function pushToCloud(){
+  async function pushToCloud(silent){
     if(!fbUser || !db) return;
-    setSyncStatus('Đang tải lên...');
+    if(!silent) setSyncStatus('Đang tải lên...');
     try{
       const data = collectAllData();
       await db.collection('users').doc(fbUser.uid).set(data);
-      setSyncStatus('Đã tải lên lúc ' + new Date().toLocaleTimeString('vi-VN'));
-      toastB('Đã tải dữ liệu lên đám mây.', '☁️');
+      setSyncStatus('Đã đồng bộ lúc ' + new Date().toLocaleTimeString('vi-VN'));
+      if(!silent) toastB('Đã tải dữ liệu lên đám mây.', '☁️');
     }catch(err){
-      setSyncStatus('');
-      toastB('Lỗi tải lên: ' + err.message, '⚠');
+      if(!silent){ setSyncStatus(''); toastB('Lỗi tải lên: ' + err.message, '⚠'); }
     }
   }
 
@@ -1886,6 +1885,30 @@ document.querySelectorAll('.nav-tab').forEach(btn=>{
       toastB('Lỗi tải về: ' + err.message, '⚠');
     }
   }
+
+  // ---------- TỰ ĐỘNG LƯU (localStorage của trình duyệt + đồng bộ ngầm Firebase) ----------
+  const AUTOSAVE_KEY = 'flow_autosave_v1';
+
+  function saveLocalAutosave(){
+    try{ localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(collectAllData())); }catch(e){}
+  }
+  function restoreLocalAutosave(){
+    try{
+      const raw = localStorage.getItem(AUTOSAVE_KEY);
+      if(!raw) return;
+      applyImportedData(JSON.parse(raw));
+      toastB('Đã khôi phục dữ liệu từ lần dùng trước trên máy này.', '🔄');
+    }catch(e){}
+  }
+  setTimeout(restoreLocalAutosave, 0); // hoãn tới khi mọi module (kể cả các module định nghĩa sau IIFE này) đã sẵn sàng
+
+  function autosaveTick(){
+    saveLocalAutosave();
+    if(fbUser && db) pushToCloud(true); // đồng bộ ngầm lên Firebase nếu đã đăng nhập, không hiện toast
+  }
+  setInterval(autosaveTick, 8000);
+  window.addEventListener('beforeunload', saveLocalAutosave);
+  document.addEventListener('visibilitychange', ()=>{ if(document.hidden) saveLocalAutosave(); });
 })();
 
 
