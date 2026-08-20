@@ -40,23 +40,39 @@
   #aurora{ display:none; }
 
   /* ---------------- shell / nav ---------------- */
-  .shell-top{ position:relative; z-index:2; max-width:1320px; margin:0 auto; padding:26px 22px 0; }
-  .app-topbar{ display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-bottom:22px; }
-  .shell{ position:relative; z-index:2; max-width:1240px; margin:0 auto; padding:0 22px 60px; min-height:60vh; }
+  .app-shell-layout{ display:flex; min-height:100vh; position:relative; z-index:2; }
 
-  .brand{ display:flex; align-items:center; gap:10px; font-size:24px; font-weight:700; letter-spacing:-.01em; color:var(--text-hi); }
-  .brand .mark{ width:34px; height:34px; border-radius:10px; background:var(--accent); display:flex; align-items:center; justify-content:center; font-size:19.5px; }
+  .sidebar-nav{
+    width:270px; flex-shrink:0; position:sticky; top:0; height:100vh; overflow-y:auto;
+    display:flex; flex-direction:column; padding:24px 16px;
+    background:var(--glass); border-right:1.5px solid var(--glass-border);
+  }
+  .main-content{ flex:1; min-width:0; }
+  .shell{ position:relative; z-index:2; max-width:1240px; margin:0 auto; padding:26px 22px 60px; min-height:60vh; }
 
-  .app-nav{ display:flex; gap:6px; background:var(--glass); border:1.5px solid var(--glass-border); border-radius:14px; padding:5px; box-shadow:0 2px 10px rgba(20,24,31,.05); }
+  .brand{ display:flex; align-items:center; gap:10px; font-size:22px; font-weight:700; letter-spacing:-.01em; color:var(--text-hi); padding:0 6px; margin-bottom:22px; }
+  .brand .mark{ width:34px; height:34px; border-radius:10px; background:var(--accent); display:flex; align-items:center; justify-content:center; font-size:19.5px; flex-shrink:0; }
+
+  .app-nav{ display:flex; flex-direction:column; gap:4px; flex:1; }
   .nav-tab{
     border:none; background:transparent; color:var(--text-lo); font-family:'Inter',sans-serif;
-    font-size:17px; font-weight:700; padding:11px 18px; border-radius:10px; cursor:pointer;
-    display:flex; align-items:center; gap:7px; transition:all .18s ease;
+    font-size:15.5px; font-weight:700; padding:12px 14px; border-radius:11px; cursor:pointer;
+    display:flex; align-items:center; gap:10px; transition:all .18s ease; text-align:left; width:100%;
   }
   .nav-tab:hover{ background:var(--glass-strong); }
   .nav-tab.active{ background:var(--accent); color:#fff; font-weight:700; }
+  .sidebar-footer{ display:flex; flex-direction:column; gap:10px; margin-top:16px; padding-top:16px; border-top:1.5px solid var(--glass-border); }
+  .sidebar-footer .pill{ justify-content:center; }
   .tab-section{ display:none; }
   .tab-section.active{ display:block; }
+
+  @media (max-width:860px){
+    .app-shell-layout{ flex-direction:column; }
+    .sidebar-nav{ width:100%; height:auto; position:relative; flex-direction:row; flex-wrap:wrap; align-items:center; gap:10px; }
+    .brand{ margin-bottom:0; }
+    .app-nav{ flex-direction:row; flex-wrap:wrap; }
+    .sidebar-footer{ flex-direction:row; margin-top:0; padding-top:0; border-top:none; border-left:1.5px solid var(--glass-border); padding-left:14px; }
+  }
 
   .pill{ display:flex; align-items:center; gap:7px; background:var(--glass); border:1.5px solid var(--glass-border); padding:8px 15px; border-radius:100px; font-size:16.5px; color:var(--text-lo); }
   .pill .dot{ width:8px; height:8px; border-radius:50%; background:var(--teal); }
@@ -119,8 +135,9 @@
   .rewards-strip h3{ font-size:15.5px; color:var(--text-lo); font-weight:700; margin:0 0 10px; text-transform:uppercase; letter-spacing:.06em; }
 
   /* ================ HÔM NAY (tổng hợp) ================ */
-  .today-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-  @media (max-width:900px){ .today-grid{ grid-template-columns:1fr; } }
+  .today-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  @media (max-width:1100px){ .today-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:600px){ .today-grid{ grid-template-columns:1fr; } }
   .today-col-title{ font-size:13.5px; font-weight:700; color:var(--text-lo); margin-bottom:10px; text-transform:uppercase; letter-spacing:.04em; }
   .today-item{ padding:9px 12px; border-radius:10px; background:var(--glass-strong); font-size:14.5px; margin-bottom:6px; }
   .today-empty{ font-size:13.5px; color:var(--text-lo); font-style:italic; }
@@ -395,6 +412,18 @@
   .mp-cell .mp-cell-cal{ font-size:10.5px; color:var(--text-lo); margin-top:2px; }
   .mp-day-total{ font-size:11.5px; font-weight:700; color:var(--accent); text-align:center; }
 
+  /* ================ TRI ÂN ================ */
+  .gr-item{ padding:12px 14px; border-radius:12px; background:var(--glass-strong); margin-bottom:8px; cursor:pointer; transition:background .15s ease; }
+  .gr-item:hover{ background:var(--accent-tint); }
+  .gr-item.soon{ border:1.5px solid var(--accent); }
+  .gr-item-top{ display:flex; align-items:center; gap:10px; }
+  .gr-icon{ font-size:20px; flex-shrink:0; }
+  .gr-name{ font-weight:700; font-size:15.5px; flex:1; }
+  .gr-rel-badge{ font-size:11.5px; color:var(--text-lo); background:var(--glass); border:1px solid var(--glass-border); padding:3px 10px; border-radius:100px; flex-shrink:0; }
+  .gr-countdown{ font-size:13px; font-weight:700; color:var(--accent); flex-shrink:0; }
+  .gr-dates{ font-size:13px; color:var(--text-lo); margin-top:5px; margin-left:30px; }
+  .gr-note{ font-size:13px; color:var(--text-lo); margin-top:4px; margin-left:30px; font-style:italic; }
+
 </style>
 </head>
 <body data-mode="focus">
@@ -402,10 +431,10 @@
 <div id="aurora"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
 <div id="toastHost"></div>
 
-<div class="shell-top">
-  <div class="app-topbar">
+<div class="app-shell-layout">
+  <nav class="sidebar-nav">
     <div class="brand"><span class="mark">🗓️</span> Flow</div>
-    <nav class="app-nav">
+    <div class="app-nav">
       <button class="nav-tab active" data-tab="tabWorkspace">☀️ Không Gian Làm Việc</button>
       <button class="nav-tab" data-tab="tabPlanner">🗓️ Kế Hoạch &amp; Lịch Làm Việc</button>
       <button class="nav-tab" data-tab="tabStats">📊 Thống Kê Hiệu Quả</button>
@@ -414,11 +443,15 @@
       <button class="nav-tab" data-tab="tabGoodDeeds">🌱 Nhật Ký Việc Tốt</button>
       <button class="nav-tab" data-tab="tabSalary">💰 Tính Lương</button>
       <button class="nav-tab" data-tab="tabMealPlans">🍽️ Meal Plans</button>
-    </nav>
-    <div class="pill"><span class="dot"></span><span id="syncStatusPill">Đang lưu...</span></div>
-    <button class="btn btn-sm" id="openBackup">💾 Sao lưu</button>
-  </div>
-</div>
+      <button class="nav-tab" data-tab="tabGratitude">💝 Tri Ân</button>
+    </div>
+    <div class="sidebar-footer">
+      <div class="pill"><span class="dot"></span><span id="syncStatusPill">Đang lưu...</span></div>
+      <button class="btn btn-sm" id="openBackup">💾 Sao lưu</button>
+    </div>
+  </nav>
+
+  <main class="main-content">
 
 <section id="tabWorkspace" class="tab-section active">
 
@@ -496,6 +529,10 @@
       <div class="today-col">
         <div class="today-col-title">🍽️ Bữa ăn đã lên kế hoạch</div>
         <div id="todayMeals"></div>
+      </div>
+      <div class="today-col">
+        <div class="today-col-title">💝 Tri Ân sắp tới</div>
+        <div id="todayGratitude"></div>
       </div>
     </div>
   </div>
@@ -1085,6 +1122,83 @@
   </div>
 </div>
 </section>
+
+<section id="tabGratitude" class="tab-section">
+<div class="shell">
+
+  <div class="glass panel" id="grUpcomingPanel" style="margin-bottom:18px;">
+    <h2><span class="t">🔔 Sắp tới trong 7 ngày</span></h2>
+    <ul class="overdue-list" id="grUpcomingList"></ul>
+  </div>
+
+  <div class="glass panel">
+    <h2>
+      <span class="t">💝 Người thân &amp; Bạn bè</span>
+      <button class="btn btn-sm btn-primary" id="grOpenAdd">+ Thêm người</button>
+    </h2>
+    <div class="filter-row">
+      <button class="filter-chip active" data-grrel="all">Tất cả</button>
+      <button class="filter-chip" data-grrel="Gia đình">👪 Gia đình</button>
+      <button class="filter-chip" data-grrel="Bạn bè">🤝 Bạn bè</button>
+      <button class="filter-chip" data-grrel="Đồng nghiệp">💼 Đồng nghiệp</button>
+      <button class="filter-chip" data-grrel="Khác">Khác</button>
+    </div>
+    <ul class="overdue-list" id="grFullList" style="max-height:560px;"></ul>
+  </div>
+
+</div>
+</section>
+
+  </main>
+</div>
+
+<div class="modal-backdrop" id="grModalBackdrop">
+  <div class="glass modal">
+    <h3 id="grModalTitle">Thêm người</h3>
+    <div class="field">
+      <label>Tên</label>
+      <input type="text" id="grName" placeholder="VD: Mẹ">
+    </div>
+    <div class="field" style="display:flex; gap:10px;">
+      <div style="flex:1;">
+        <label>Mối quan hệ</label>
+        <select id="grRelationship">
+          <option value="Gia đình">👪 Gia đình</option>
+          <option value="Bạn bè">🤝 Bạn bè</option>
+          <option value="Đồng nghiệp">💼 Đồng nghiệp</option>
+          <option value="Khác">Khác</option>
+        </select>
+      </div>
+      <div style="flex:1;">
+        <label>Loại dịp</label>
+        <select id="grOccasion">
+          <option value="Sinh nhật">🎂 Sinh nhật</option>
+          <option value="Kỷ niệm">🎉 Kỷ niệm</option>
+          <option value="Khác">Khác</option>
+        </select>
+      </div>
+    </div>
+    <div class="field" style="display:flex; gap:10px;">
+      <div style="flex:1;">
+        <label>Ngày dương lịch</label>
+        <input type="date" id="grSolarDate">
+      </div>
+      <div style="flex:1;">
+        <label>Ngày âm lịch (không bắt buộc)</label>
+        <input type="text" id="grLunarDate" placeholder="VD: 15/7">
+      </div>
+    </div>
+    <div class="field">
+      <label>Ghi chú (sở thích, quà đã tặng, điều cần tránh...)</label>
+      <textarea id="grNote" rows="3" style="width:100%; background:var(--glass-strong); border:1.5px solid var(--glass-border); border-radius:10px; padding:11px 13px; color:var(--text-hi); font-size:15px; resize:vertical;" placeholder="VD: thích màu tím, dị ứng hải sản, năm ngoái tặng khăn lụa"></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-sm btn-danger" id="grDelete" style="display:none; margin-right:auto;">Xóa</button>
+      <button class="btn btn-sm" id="grCancel">Hủy</button>
+      <button class="btn btn-sm btn-primary" id="grSave">Thêm người</button>
+    </div>
+  </div>
+</div>
 
 <div class="modal-backdrop" id="mpPickerBackdrop">
   <div class="glass modal">
@@ -2069,6 +2183,7 @@ document.querySelectorAll('.nav-tab').forEach(btn=>{
     if(btn.dataset.tab === 'tabSalary' && window.renderSalary) window.renderSalary();
     if(btn.dataset.tab === 'tabWorkspace' && window.renderTodayOverview) window.renderTodayOverview();
     if(btn.dataset.tab === 'tabMealPlans' && window.renderMealPlans) window.renderMealPlans();
+    if(btn.dataset.tab === 'tabGratitude' && window.renderGratitude) window.renderGratitude();
   });
 });
 
@@ -2103,6 +2218,7 @@ document.querySelectorAll('.nav-tab').forEach(btn=>{
       gooddeeds: window.__gooddeeds ? window.__gooddeeds.exportData() : null,
       salary: window.__salary ? window.__salary.exportData() : null,
       mealplans: window.__mealplans ? window.__mealplans.exportData() : null,
+      gratitude: window.__gratitude ? window.__gratitude.exportData() : null,
     };
   }
 
@@ -2127,6 +2243,7 @@ document.querySelectorAll('.nav-tab').forEach(btn=>{
     if(data.gooddeeds && window.__gooddeeds) window.__gooddeeds.importData(data.gooddeeds);
     if(data.salary && window.__salary) window.__salary.importData(data.salary);
     if(data.mealplans && window.__mealplans) window.__mealplans.importData(data.mealplans);
+    if(data.gratitude && window.__gratitude) window.__gratitude.importData(data.gratitude);
   }
 
   document.getElementById('doImportBtn').addEventListener('click', ()=>{
@@ -3391,10 +3508,187 @@ Hãy giúp tôi:
     mealEl.innerHTML = slots.length
       ? slots.map(k=>`<div class="today-item">${SLOT_LABEL[k]||''} ${escapeHtml(plan[k].name)} · ${plan[k].cal} kcal</div>`).join('')
       : '<div class="today-empty">Chưa lên kế hoạch bữa nào.</div>';
+
+    // Tri Ân — người có ngày quan trọng trong 7 ngày tới
+    const grEl = document.getElementById('todayGratitude');
+    const grPeople = (window.__gratitude && window.__gratitude.exportData) ? window.__gratitude.exportData().people : [];
+    function dayUntil(iso){
+      if(!iso) return null;
+      const monthDay = iso.slice(5);
+      const t = new Date(); t.setHours(0,0,0,0);
+      let next = new Date(t.getFullYear() + '-' + monthDay + 'T00:00:00');
+      if(next < t) next = new Date((t.getFullYear()+1) + '-' + monthDay + 'T00:00:00');
+      return Math.round((next - t) / 86400000);
+    }
+    const soonPeople = grPeople.map(p=>({p, days:dayUntil(p.solarDate)})).filter(x=>x.days!=null && x.days<=7).sort((a,b)=>a.days-b.days);
+    grEl.innerHTML = soonPeople.length
+      ? soonPeople.map(x=>`<div class="today-item">${x.days===0?'🎉 Hôm nay: ':`còn ${x.days} ngày: `}${escapeHtml(x.p.name)}</div>`).join('')
+      : '<div class="today-empty">Không có ai trong 7 ngày tới.</div>';
   }
 
   window.renderTodayOverview = renderTodayOverview;
   setTimeout(renderTodayOverview, 50); // hoãn tới khi mọi module đã expose xong
+})();
+
+// ================= TRI ÂN =================
+(function(){
+  function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  const REL_ICON = { 'Gia đình':'👪', 'Bạn bè':'🤝', 'Đồng nghiệp':'💼', 'Khác':'👤' };
+  const OCC_ICON = { 'Sinh nhật':'🎂', 'Kỷ niệm':'🎉', 'Khác':'📌' };
+  const REMIND_DAYS = 7;
+
+  let people = []; // {id, name, relationship, occasion, solarDate, lunarDate, note}
+  let peopleSeq = 1;
+  let editingId = null;
+  let relFilter = 'all';
+
+  function toastG(text, icon){
+    const host = document.getElementById('toastHost');
+    const el = document.createElement('div');
+    el.className = 'glass toast';
+    el.innerHTML = `<span class="t-ic">${icon||'💝'}</span><span>${text}</span>`;
+    host.appendChild(el);
+    setTimeout(()=>{ el.style.opacity='0'; el.style.transition='opacity .4s ease'; setTimeout(()=>el.remove(),400); }, 3600);
+  }
+
+  // ngày lặp lại hằng năm: chỉ dùng phần tháng-ngày, tự tính lần xuất hiện kế tiếp kể từ hôm nay
+  function daysUntilNext(solarIso){
+    if(!solarIso) return null;
+    const monthDay = solarIso.slice(5); // 'MM-DD'
+    const today = new Date(); today.setHours(0,0,0,0);
+    let next = new Date(today.getFullYear() + '-' + monthDay + 'T00:00:00');
+    if(next < today) next = new Date((today.getFullYear()+1) + '-' + monthDay + 'T00:00:00');
+    return Math.round((next - today) / 86400000);
+  }
+  function formatDM(solarIso){ if(!solarIso) return ''; const [,m,d] = solarIso.split('-'); return `${d}/${m}`; }
+
+  function buildPersonItem(p, showCountdown){
+    const days = daysUntilNext(p.solarDate);
+    const soon = days!=null && days<=REMIND_DAYS;
+    const li = document.createElement('li');
+    li.className = 'gr-item' + (soon?' soon':'');
+    li.innerHTML = `
+      <div class="gr-item-top">
+        <span class="gr-icon">${OCC_ICON[p.occasion]||'📌'}</span>
+        <span class="gr-name">${escapeHtml(p.name)}</span>
+        <span class="gr-rel-badge">${REL_ICON[p.relationship]||''} ${escapeHtml(p.relationship)}</span>
+        ${showCountdown && days!=null ? `<span class="gr-countdown">${days===0?'Hôm nay!':'còn '+days+' ngày'}</span>` : ''}
+      </div>
+      <div class="gr-dates">${p.occasion}: ${formatDM(p.solarDate)}${p.lunarDate?` (DL) · ${escapeHtml(p.lunarDate)} (ÂL)`:''}</div>
+      ${p.note ? `<div class="gr-note">📝 ${escapeHtml(p.note)}</div>` : ''}
+    `;
+    li.addEventListener('click', ()=> openEdit(p.id));
+    return li;
+  }
+
+  function renderUpcoming(){
+    const list = document.getElementById('grUpcomingList');
+    const panel = document.getElementById('grUpcomingPanel');
+    const upcoming = people
+      .map(p=>({ p, days: daysUntilNext(p.solarDate) }))
+      .filter(x=>x.days!=null && x.days<=REMIND_DAYS)
+      .sort((a,b)=>a.days-b.days);
+    if(upcoming.length===0){ panel.style.display = 'none'; return; }
+    panel.style.display = 'block';
+    list.innerHTML = '';
+    upcoming.forEach(x=> list.appendChild(buildPersonItem(x.p, true)));
+  }
+
+  function renderFullList(){
+    const list = document.getElementById('grFullList');
+    const filtered = relFilter==='all' ? people : people.filter(p=>p.relationship===relFilter);
+    if(filtered.length===0){ list.innerHTML = '<li class="empty-hint">Chưa có ai trong danh sách — bấm "+ Thêm người" nhé.</li>'; return; }
+    const sorted = [...filtered].sort((a,b)=> daysUntilNext(a.solarDate) - daysUntilNext(b.solarDate));
+    list.innerHTML = '';
+    sorted.forEach(p=> list.appendChild(buildPersonItem(p, true)));
+  }
+
+  function renderAllGR(){ renderUpcoming(); renderFullList(); }
+
+  document.querySelectorAll('.filter-chip[data-grrel]').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      document.querySelectorAll('.filter-chip[data-grrel]').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      relFilter = chip.dataset.grrel;
+      renderFullList();
+    });
+  });
+
+  // ---------- Modal thêm/sửa ----------
+  const grModal = document.getElementById('grModalBackdrop');
+  document.getElementById('grOpenAdd').addEventListener('click', ()=>{
+    editingId = null;
+    document.getElementById('grModalTitle').textContent = 'Thêm người';
+    document.getElementById('grSave').textContent = 'Thêm người';
+    document.getElementById('grDelete').style.display = 'none';
+    document.getElementById('grName').value = '';
+    document.getElementById('grRelationship').value = 'Gia đình';
+    document.getElementById('grOccasion').value = 'Sinh nhật';
+    document.getElementById('grSolarDate').value = '';
+    document.getElementById('grLunarDate').value = '';
+    document.getElementById('grNote').value = '';
+    grModal.classList.add('show');
+  });
+  function openEdit(id){
+    const p = people.find(x=>x.id===id);
+    if(!p) return;
+    editingId = id;
+    document.getElementById('grModalTitle').textContent = 'Sửa thông tin';
+    document.getElementById('grSave').textContent = 'Lưu thay đổi';
+    document.getElementById('grDelete').style.display = 'inline-block';
+    document.getElementById('grName').value = p.name;
+    document.getElementById('grRelationship').value = p.relationship;
+    document.getElementById('grOccasion').value = p.occasion;
+    document.getElementById('grSolarDate').value = p.solarDate || '';
+    document.getElementById('grLunarDate').value = p.lunarDate || '';
+    document.getElementById('grNote').value = p.note || '';
+    grModal.classList.add('show');
+  }
+  document.getElementById('grCancel').addEventListener('click', ()=> grModal.classList.remove('show'));
+  grModal.addEventListener('click', e=>{ if(e.target===grModal) grModal.classList.remove('show'); });
+  document.getElementById('grDelete').addEventListener('click', ()=>{
+    if(!editingId) return;
+    people = people.filter(x=>x.id!==editingId);
+    grModal.classList.remove('show');
+    renderAllGR();
+    toastG('Đã xóa.', '🗑️');
+  });
+  document.getElementById('grSave').addEventListener('click', ()=>{
+    const name = document.getElementById('grName').value.trim();
+    const solarDate = document.getElementById('grSolarDate').value;
+    if(!name || !solarDate){ toastG('Nhập tên và ngày dương lịch nhé.', '⚠'); return; }
+    const data = {
+      name,
+      relationship: document.getElementById('grRelationship').value,
+      occasion: document.getElementById('grOccasion').value,
+      solarDate,
+      lunarDate: document.getElementById('grLunarDate').value.trim(),
+      note: document.getElementById('grNote').value.trim()
+    };
+    if(editingId){
+      const p = people.find(x=>x.id===editingId);
+      if(p) Object.assign(p, data);
+      toastG('Đã lưu thay đổi.', '💝');
+    } else {
+      people.push({ id:'gr'+(peopleSeq++), ...data });
+      toastG('Đã thêm vào danh sách.', '💝');
+    }
+    grModal.classList.remove('show');
+    renderAllGR();
+  });
+
+  window.renderGratitude = renderAllGR;
+  window.__gratitude = {
+    exportData(){ return { people }; },
+    importData(d){
+      people = Array.isArray(d.people) ? d.people : [];
+      const maxP = people.reduce((m,p)=>{ const n=parseInt(String(p.id).replace('gr',''),10); return isNaN(n)?m:Math.max(m,n); }, 0);
+      peopleSeq = maxP+1;
+      renderAllGR();
+    }
+  };
+  renderAllGR();
 })();
 
 // ================= ĐĂNG KÝ SERVICE WORKER (cài đặt PWA + chạy offline) =================
