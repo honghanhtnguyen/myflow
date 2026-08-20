@@ -117,6 +117,17 @@
 
   .rewards-strip{ width:100%; margin-top:8px; }
   .rewards-strip h3{ font-size:15.5px; color:var(--text-lo); font-weight:700; margin:0 0 10px; text-transform:uppercase; letter-spacing:.06em; }
+
+  /* ================ HÔM NAY (tổng hợp) ================ */
+  .today-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  @media (max-width:900px){ .today-grid{ grid-template-columns:1fr; } }
+  .today-col-title{ font-size:13.5px; font-weight:700; color:var(--text-lo); margin-bottom:10px; text-transform:uppercase; letter-spacing:.04em; }
+  .today-item{ padding:9px 12px; border-radius:10px; background:var(--glass-strong); font-size:14.5px; margin-bottom:6px; }
+  .today-empty{ font-size:13.5px; color:var(--text-lo); font-style:italic; }
+
+  .date-shortcuts{ display:flex; gap:5px; margin-top:6px; }
+  .date-shortcut-btn{ font-size:11.5px; padding:4px 10px; border-radius:100px; border:1px solid var(--glass-border); background:var(--glass-strong); color:var(--text-lo); cursor:pointer; }
+  .date-shortcut-btn:hover{ background:var(--accent-tint); border-color:var(--accent); color:var(--text-hi); }
   .badge-row{ display:flex; gap:8px; flex-wrap:wrap; }
   .badge{ display:flex; align-items:center; gap:6px; padding:8px 13px; border-radius:100px; font-size:15.5px; background:var(--glass-strong); border:1.5px solid var(--glass-border); color:var(--text-lo); }
   .badge.unlocked{ color:#fff; background:var(--accent); border:none; font-weight:700; }
@@ -348,6 +359,42 @@
   .ct-item .ct-del{ background:none; border:none; color:var(--text-lo); cursor:pointer; font-size:15px; opacity:0; flex-shrink:0; }
   .ct-item:hover .ct-del{ opacity:1; }
 
+  /* ================ TÍNH LƯƠNG ================ */
+  .sl-table{ width:100%; border-collapse:collapse; min-width:640px; }
+  .sl-table th{ text-align:left; font-size:12.5px; color:var(--text-lo); font-weight:700; text-transform:uppercase; letter-spacing:.04em; padding:8px 10px; border-bottom:1.5px solid var(--glass-border); }
+  .sl-table td{ padding:10px; font-size:15px; border-bottom:1px solid var(--glass-border); vertical-align:middle; }
+  .sl-table tr .sl-amount{ font-weight:700; color:var(--accent); }
+  .sl-table .sl-pct{ color:var(--text-lo); }
+  .sl-del{ background:none; border:none; color:var(--text-lo); cursor:pointer; font-size:15px; }
+  .sl-month-total{ display:flex; justify-content:space-between; align-items:center; margin-top:16px; padding-top:16px; border-top:1.5px solid var(--glass-border); font-size:17px; font-weight:700; }
+  .sl-month-total span:last-child{ font-size:22px; color:var(--accent); font-family:'Sora',sans-serif; }
+
+  /* ================ MEAL PLANS ================ */
+  .mp-dish-item{ display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:11px; background:var(--glass-strong); font-size:14.5px; margin-bottom:6px; }
+  .mp-dish-item .mp-cat-badge{ font-size:11px; font-weight:700; padding:3px 9px; border-radius:100px; background:var(--accent); color:#fff; flex-shrink:0; }
+  .mp-dish-item .mp-dish-name{ flex:1; }
+  .mp-dish-item .mp-dish-cal{ color:var(--text-lo); font-size:13px; flex-shrink:0; }
+  .mp-dish-item .mp-dish-del{ background:none; border:none; color:var(--text-lo); cursor:pointer; font-size:14px; opacity:0; flex-shrink:0; }
+  .mp-dish-item:hover .mp-dish-del{ opacity:1; }
+  .mp-dish-item.pickable{ cursor:pointer; transition:background .15s ease; }
+  .mp-dish-item.pickable:hover{ background:var(--accent-tint); }
+
+  .mp-table{ width:100%; border-collapse:collapse; min-width:760px; }
+  .mp-table th{ font-size:12px; color:var(--text-lo); font-weight:700; padding:6px 5px; text-align:center; border-bottom:1.5px solid var(--glass-border); }
+  .mp-table th:first-child{ text-align:left; }
+  .mp-table td{ padding:4px; border-bottom:1px solid var(--glass-border); vertical-align:top; }
+  .mp-slot-label{ font-size:12.5px; color:var(--text-lo); font-weight:600; white-space:nowrap; padding-right:8px; }
+  .mp-cell{
+    min-height:50px; border-radius:9px; background:var(--glass-strong); border:1.5px dashed var(--glass-border);
+    padding:6px 8px; cursor:pointer; text-align:center; font-size:11.5px; color:var(--text-lo);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; transition:all .15s ease;
+  }
+  .mp-cell:hover{ border-color:var(--accent); }
+  .mp-cell.filled{ background:var(--accent-tint); border:1.5px solid var(--accent); color:var(--text-hi); }
+  .mp-cell .mp-cell-name{ font-weight:700; font-size:12px; line-height:1.25; }
+  .mp-cell .mp-cell-cal{ font-size:10.5px; color:var(--text-lo); margin-top:2px; }
+  .mp-day-total{ font-size:11.5px; font-weight:700; color:var(--accent); text-align:center; }
+
 </style>
 </head>
 <body data-mode="focus">
@@ -365,6 +412,8 @@
       <button class="nav-tab" data-tab="tabWeight">⚖️ Kiểm Soát Cân Nặng</button>
       <button class="nav-tab" data-tab="tabTamDao">🙏 Tâm Đạo</button>
       <button class="nav-tab" data-tab="tabGoodDeeds">🌱 Nhật Ký Việc Tốt</button>
+      <button class="nav-tab" data-tab="tabSalary">💰 Tính Lương</button>
+      <button class="nav-tab" data-tab="tabMealPlans">🍽️ Meal Plans</button>
     </nav>
     <div class="pill"><span class="dot"></span><span id="syncStatusPill">Đang lưu...</span></div>
     <button class="btn btn-sm" id="openBackup">💾 Sao lưu</button>
@@ -384,6 +433,7 @@
         <input type="text" id="taskInput" placeholder="Thêm việc cần làm..." maxlength="80">
         <button class="icon-btn" id="taskAddBtn">+</button>
       </div>
+      <button class="btn btn-sm" id="pickFromKanbanBtn" style="width:100%; margin-bottom:10px;">📋 Chọn từ Kanban</button>
       <ul class="task-list" id="taskList"></ul>
     </div>
 
@@ -431,9 +481,28 @@
     </div>
 
   </div>
-</div>
 
-<!-- QUICK DOCK -->
+  <div class="glass panel" style="margin-top:18px;">
+    <h2><span class="ic">📌</span> Hôm nay</h2>
+    <div class="today-grid" id="todayOverviewGrid">
+      <div class="today-col">
+        <div class="today-col-title">🗂️ Việc cần làm</div>
+        <div id="todayTasks"></div>
+      </div>
+      <div class="today-col">
+        <div class="today-col-title">🙏 Tâm Đạo</div>
+        <div id="todayTamDao"></div>
+      </div>
+      <div class="today-col">
+        <div class="today-col-title">🍽️ Bữa ăn đã lên kế hoạch</div>
+        <div id="todayMeals"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- QUICK DOCK — nằm ngoài mọi section để luôn hiện diện dù đang ở tab nào -->
 <div class="glass" id="quickDock">
   <button class="dock-btn" id="dockTaskBtn">➕ Task</button>
   <div class="dock-sep"></div>
@@ -461,7 +530,6 @@
   <div class="row-end"><button class="btn btn-sm" id="popTimeCancel">Hủy</button><button class="btn btn-sm btn-primary" id="popTimeSave">Ghi lại</button></div>
   <div class="time-log-list" id="popTimeList"></div>
 </div>
-</section>
 
 <section id="tabPlanner" class="tab-section">
 <div class="shell">
@@ -897,6 +965,157 @@
 </div>
 </section>
 
+<section id="tabSalary" class="tab-section">
+<div class="shell">
+
+  <div class="glass stat-card accent" style="margin-bottom:18px;">
+    <div class="stat-label">Tổng lương thực nhận lũy kế toàn thời gian</div>
+    <div class="stat-value" id="slLifetimeTotal">0 đ</div>
+  </div>
+
+  <div class="glass panel" style="margin-bottom:18px;">
+    <h2>
+      <span class="t">➕ Thêm buổi dạy</span>
+      <button class="btn btn-sm" id="slManageClassBtn">⚙️ Quản lý lớp</button>
+    </h2>
+    <div class="field" style="display:flex; gap:10px; flex-wrap:wrap;">
+      <div style="flex:0 0 160px;">
+        <label>Ngày</label>
+        <input type="date" id="slDate">
+      </div>
+      <div style="flex:1; min-width:160px;">
+        <label>Lớp</label>
+        <select id="slClassSelect"><option value="">— Chọn lớp đã lưu hoặc gõ mới bên dưới —</option></select>
+      </div>
+      <div style="flex:1; min-width:120px;">
+        <label>Tên lớp (nếu gõ mới)</label>
+        <input type="text" id="slClass" placeholder="VD: Lớp 8A">
+      </div>
+      <div style="flex:0 0 130px;">
+        <label>Số học sinh</label>
+        <input type="text" id="slStudents" placeholder="VD: 12">
+      </div>
+      <div style="flex:0 0 160px;">
+        <label>Đơn giá/học sinh (đ)</label>
+        <input type="text" id="slRate" placeholder="VD: 50000">
+      </div>
+      <div style="flex:0 0 150px;">
+        <label>Gửi trung tâm (%)</label>
+        <input type="text" id="slPercent" placeholder="VD: 20">
+      </div>
+      <button class="btn btn-primary" id="slAddBtn" style="height:52px;">+ Thêm</button>
+    </div>
+  </div>
+
+  <div class="glass panel">
+    <div class="cal-head" style="margin-bottom:16px;">
+      <div class="cal-nav">
+        <button id="slPrevBtn">‹</button>
+        <div class="cal-title" id="slMonthTitle"></div>
+        <button id="slNextBtn">›</button>
+        <button class="today-btn" id="slTodayBtn">Tháng này</button>
+      </div>
+    </div>
+
+    <div style="overflow-x:auto;">
+      <table class="sl-table">
+        <thead>
+          <tr>
+            <th>Ngày</th>
+            <th>Lớp</th>
+            <th>Số HS</th>
+            <th>Đơn giá</th>
+            <th>Thành tiền</th>
+            <th>Gửi TT (%)</th>
+            <th>Thực nhận</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="slTableBody"></tbody>
+      </table>
+    </div>
+
+    <div class="sl-month-total">
+      <span>Tổng lương thực nhận tháng này</span>
+      <span id="slMonthTotal">0 đ</span>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<section id="tabMealPlans" class="tab-section">
+<div class="shell">
+  <div class="layout">
+
+    <!-- THƯ VIỆN MÓN ĂN -->
+    <div class="glass panel">
+      <h2><span class="t">🍲 Thư viện món ăn</span></h2>
+      <div class="field" style="display:flex; gap:8px; flex-wrap:wrap;">
+        <input type="text" id="mpDishName" placeholder="Tên món ăn" style="flex:1; min-width:140px; background:var(--glass-strong); border:1.5px solid var(--glass-border); border-radius:10px; padding:11px 13px; color:var(--text-hi); font-size:15px;">
+        <input type="text" id="mpDishCat" list="mpCatSuggest" placeholder="Chuyên mục (VD: Chay)" style="flex:0 0 150px; background:var(--glass-strong); border:1.5px solid var(--glass-border); border-radius:10px; padding:11px 13px; color:var(--text-hi); font-size:15px;">
+        <datalist id="mpCatSuggest"><option value="Chay"><option value="Mặn"></datalist>
+        <input type="text" id="mpDishCal" placeholder="Calo" style="flex:0 0 100px; background:var(--glass-strong); border:1.5px solid var(--glass-border); border-radius:10px; padding:11px 13px; color:var(--text-hi); font-size:15px;">
+      </div>
+      <button class="btn btn-primary" style="width:100%; margin-top:10px;" id="mpAddDishBtn">+ Thêm món vào thư viện</button>
+
+      <div class="filter-row" style="margin-top:16px;" id="mpCatFilterRow">
+        <button class="filter-chip active" data-mpcat="all">Tất cả</button>
+      </div>
+      <ul class="overdue-list" id="mpDishList" style="max-height:420px;"></ul>
+    </div>
+
+    <!-- LỊCH CHỌN MÓN -->
+    <div class="glass panel">
+      <h2><span class="t">📅 Lịch chọn món</span></h2>
+      <div class="cal-head" style="margin-bottom:14px;">
+        <div class="cal-nav">
+          <button id="mpPrevBtn">‹</button>
+          <div class="cal-title" id="mpWeekTitle"></div>
+          <button id="mpNextBtn">›</button>
+          <button class="today-btn" id="mpTodayBtn">Tuần này</button>
+        </div>
+        <button class="btn btn-sm" id="mpSyncBtn">🔗 Liên kết lại toàn tuần sang trang Cân Nặng</button>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="mp-table" id="mpWeekTable"></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<div class="modal-backdrop" id="mpPickerBackdrop">
+  <div class="glass modal">
+    <h3 id="mpPickerTitle">Chọn món ăn</h3>
+    <div class="filter-row" id="mpPickerCatRow" style="margin-bottom:14px;">
+      <button class="filter-chip active" data-mppcat="all">Tất cả</button>
+    </div>
+    <ul class="overdue-list" id="mpPickerList" style="max-height:360px;"></ul>
+    <div class="modal-actions">
+      <button class="btn btn-sm btn-danger" id="mpPickerClear" style="margin-right:auto;">Xóa lựa chọn</button>
+      <button class="btn btn-sm" id="mpPickerCancel">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="classManageBackdrop">
+  <div class="glass modal">
+    <h3>⚙️ Quản lý danh sách lớp</h3>
+    <div class="field" style="display:flex; gap:8px; flex-wrap:wrap;">
+      <input type="text" id="cmName" placeholder="Tên lớp" style="flex:1; min-width:120px; background:var(--glass-strong); border:1.5px solid var(--glass-border); border-radius:10px; padding:11px 13px; color:var(--text-hi); font-size:15px;">
+      <input type="text" id="cmRate" placeholder="Đơn giá/HS" style="flex:0 0 130px; background:var(--glass-strong); border:1.5px solid var(--glass-border); border-radius:10px; padding:11px 13px; color:var(--text-hi); font-size:15px;">
+      <input type="text" id="cmPercent" placeholder="% gửi TT" style="flex:0 0 110px; background:var(--glass-strong); border:1.5px solid var(--glass-border); border-radius:10px; padding:11px 13px; color:var(--text-hi); font-size:15px;">
+    </div>
+    <button class="btn btn-primary" style="width:100%; margin-top:10px;" id="cmAddBtn">+ Lưu lớp</button>
+    <ul class="overdue-list" id="cmList" style="max-height:280px; margin-top:16px;"></ul>
+    <div class="modal-actions">
+      <button class="btn btn-sm" id="cmCloseBtn">Đóng</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal-backdrop" id="tdModalBackdrop">
   <div class="glass modal">
     <h3 id="tdModalTitle">Thêm mốc Tâm Đạo</h3>
@@ -918,6 +1137,17 @@
       <button class="btn btn-sm btn-danger" id="tdDelete" style="display:none; margin-right:auto;">Xóa mốc</button>
       <button class="btn btn-sm" id="tdCancel">Hủy</button>
       <button class="btn btn-sm btn-primary" id="tdSave">Thêm mốc</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="kanbanPickBackdrop">
+  <div class="glass modal">
+    <h3>📋 Chọn công việc từ Kanban</h3>
+    <p style="font-size:14px; color:var(--text-lo); margin:-6px 0 14px;">Chỉ hiện các việc ở cột Cần làm / Đang làm.</p>
+    <ul class="overdue-list" id="kanbanPickList" style="max-height:400px;"></ul>
+    <div class="modal-actions">
+      <button class="btn btn-sm" id="kanbanPickCancel">Đóng</button>
     </div>
   </div>
 </div>
@@ -994,6 +1224,29 @@
 const SUPABASE_URL = "";       // VD: "https://xxxxx.supabase.co"
 const SUPABASE_ANON_KEY = "";  // VD: "eyJhbGciOi..."
 
+// Hàm dùng chung: gắn 3 nút "Hôm qua / Hôm nay / Mai" ngay sau 1 ô input[type=date],
+// bấm là điền ngày luôn, không cần mở lịch chọn. Dùng ở nhiều tab (Tính Lương, Việc Tốt, Cân Nặng...).
+function attachDateShortcuts(inputId){
+  const input = document.getElementById(inputId);
+  if(!input || input.dataset.shortcutsAttached) return;
+  input.dataset.shortcutsAttached = '1';
+  const wrap = document.createElement('div');
+  wrap.className = 'date-shortcuts';
+  [['Hôm qua',-1],['Hôm nay',0],['Mai',1]].forEach(([label,offset])=>{
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'date-shortcut-btn';
+    btn.textContent = label;
+    btn.addEventListener('click', ()=>{
+      const d = new Date(); d.setDate(d.getDate()+offset);
+      input.value = d.toISOString().slice(0,10);
+      input.dispatchEvent(new Event('change'));
+    });
+    wrap.appendChild(btn);
+  });
+  input.insertAdjacentElement('afterend', wrap);
+}
+
 (function(){
   // ------------------------------------------------------------------
   // CHẾ ĐỘ THỬ NGHIỆM: bỏ bước đăng nhập để bạn dùng thử tính năng ngay.
@@ -1064,6 +1317,42 @@ const SUPABASE_ANON_KEY = "";  // VD: "eyJhbGciOi..."
     renderTasks();
   }
   document.getElementById('taskAddBtn').addEventListener('click', ()=>{ addTask(taskInput.value); taskInput.value=''; });
+
+  // ---------- Chọn task từ Kanban (Kế Hoạch & Lịch Làm Việc) ----------
+  const kanbanPickModal = document.getElementById('kanbanPickBackdrop');
+  document.getElementById('pickFromKanbanBtn').addEventListener('click', ()=>{
+    const list = document.getElementById('kanbanPickList');
+    const kTasks = (window.__planner && window.__planner.tasks) ? window.__planner.tasks.filter(t=>(t.status||'todo')!=='done') : [];
+    if(kTasks.length===0){
+      list.innerHTML = '<li class="empty-hint">Chưa có việc nào ở Cần làm/Đang làm trong Kanban.</li>';
+    } else {
+      const U_ICON = { critical:'🔴', high:'🟠', normal:'🟡', low:'⚪' };
+      list.innerHTML = kTasks.map(t=>`
+        <li class="overdue-item" style="cursor:pointer;" data-kid="${t.id}">
+          <span>${U_ICON[t.urgency]||''}</span>
+          <span class="od-text">${t.text}</span>
+          <span class="od-date">${t.status==='doing'?'Đang làm':'Cần làm'}</span>
+        </li>`).join('');
+      list.querySelectorAll('li[data-kid]').forEach((li,i)=>{
+        li.addEventListener('click', ()=>{
+          const t = kTasks[i];
+          const existing = tasks.find(x=>x.fromKanbanId===t.id);
+          if(existing){ activeTaskId = existing.id; }
+          else{
+            const newTask = { id:'wk'+Date.now(), text:t.text, done:false, fromKanbanId:t.id };
+            tasks.push(newTask);
+            activeTaskId = newTask.id;
+          }
+          updateRingTask(); renderTasks();
+          kanbanPickModal.classList.remove('show');
+          toast('Đã chọn "' + t.text + '" làm việc đang làm.', '📋');
+        });
+      });
+    }
+    kanbanPickModal.classList.add('show');
+  });
+  document.getElementById('kanbanPickCancel').addEventListener('click', ()=> kanbanPickModal.classList.remove('show'));
+  kanbanPickModal.addEventListener('click', e=>{ if(e.target===kanbanPickModal) kanbanPickModal.classList.remove('show'); });
   taskInput.addEventListener('keydown', e=>{ if(e.key==='Enter'){ addTask(taskInput.value); taskInput.value=''; } });
 
   function escapeHtml(s){ return s.replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
@@ -1777,6 +2066,9 @@ document.querySelectorAll('.nav-tab').forEach(btn=>{
     if(btn.dataset.tab === 'tabWeight' && window.renderWeightTab) window.renderWeightTab();
     if(btn.dataset.tab === 'tabTamDao' && window.renderTamDao) window.renderTamDao();
     if(btn.dataset.tab === 'tabGoodDeeds' && window.renderGoodDeeds) window.renderGoodDeeds();
+    if(btn.dataset.tab === 'tabSalary' && window.renderSalary) window.renderSalary();
+    if(btn.dataset.tab === 'tabWorkspace' && window.renderTodayOverview) window.renderTodayOverview();
+    if(btn.dataset.tab === 'tabMealPlans' && window.renderMealPlans) window.renderMealPlans();
   });
 });
 
@@ -1809,6 +2101,8 @@ document.querySelectorAll('.nav-tab').forEach(btn=>{
       weight: window.__weight ? window.__weight.exportData() : null,
       tamdao: window.__tamdao ? window.__tamdao.exportData() : null,
       gooddeeds: window.__gooddeeds ? window.__gooddeeds.exportData() : null,
+      salary: window.__salary ? window.__salary.exportData() : null,
+      mealplans: window.__mealplans ? window.__mealplans.exportData() : null,
     };
   }
 
@@ -1831,6 +2125,8 @@ document.querySelectorAll('.nav-tab').forEach(btn=>{
     if(data.weight && window.__weight) window.__weight.importData(data.weight);
     if(data.tamdao && window.__tamdao) window.__tamdao.importData(data.tamdao);
     if(data.gooddeeds && window.__gooddeeds) window.__gooddeeds.importData(data.gooddeeds);
+    if(data.salary && window.__salary) window.__salary.importData(data.salary);
+    if(data.mealplans && window.__mealplans) window.__mealplans.importData(data.mealplans);
   }
 
   document.getElementById('doImportBtn').addEventListener('click', ()=>{
@@ -2167,6 +2463,8 @@ Hãy giúp tôi:
 
   document.getElementById('wDate').value = todayIso();
   document.getElementById('cDate').value = todayIso();
+  attachDateShortcuts('wDate');
+  attachDateShortcuts('cDate');
 
   // ---------- Ghi nhận cân nặng & số đo ----------
   document.getElementById('wSaveBtn').addEventListener('click', ()=>{
@@ -2373,6 +2671,13 @@ Hãy giúp tôi:
       weightSeq = maxW+1;
       if(d.tdee) document.getElementById('settingTdee').value = d.tdee;
       renderWeightHistory(); renderWeightChart(); loadCalorieFormForDate(); renderPeriodSummary();
+    },
+    // ghi đè riêng các trường calo theo bữa cho 1 ngày, không đụng tới weightEntries hay calorieOut đã có
+    mergeCalorieForDate(date, mealValues){
+      const existing = calorieByDate[date] || { sang:0, phuSang:0, chieu:0, phuChieu:0, toi:0, douong:0, calorieOut:0 };
+      calorieByDate[date] = { ...existing, ...mealValues };
+      if(document.getElementById('cDate').value === date) loadCalorieFormForDate();
+      renderPeriodSummary();
     }
   };
   renderWeightHistory();
@@ -2523,6 +2828,7 @@ Hãy giúp tôi:
     document.getElementById('tdDelete').style.display = 'none';
     document.getElementById('tdTitle').value = '';
     document.getElementById('tdDate').value = todayIso();
+    attachDateShortcuts('tdDate');
     document.getElementById('tdLunar').value = '';
     modal.classList.add('show');
   });
@@ -2600,6 +2906,8 @@ Hãy giúp tôi:
 
   document.getElementById('gdDate').value = todayIso();
   document.getElementById('ctDate').value = todayIso();
+  attachDateShortcuts('gdDate');
+  attachDateShortcuts('ctDate');
 
   // ---------- Việc tốt hằng ngày ----------
   function renderGoodDeedsList(){
@@ -2694,6 +3002,399 @@ Hãy giúp tôi:
     }
   };
   renderAllGD();
+})();
+
+// ================= TÍNH LƯƠNG =================
+(function(){
+  function isoDate(d){ return d.toISOString().slice(0,10); }
+  function todayIso(){ return isoDate(new Date()); }
+  function formatVN(iso){ const [y,m,d]=iso.split('-'); return `${d}/${m}`; }
+  function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function num(v){ const n = parseFloat(String(v).replace(/[.,\s]/g,'')); return isNaN(n) ? 0 : n; }
+  function money(n){ return Math.round(n).toLocaleString('vi-VN') + ' đ'; }
+
+  let entries = []; // {id, date, cls, students, rate, pct}
+  let slSeq = 1;
+  let refMonth = new Date();
+  let savedClasses = []; // {id, name, rate, pct}
+  let cmSeq = 1;
+
+  function toastS(text, icon){
+    const host = document.getElementById('toastHost');
+    const el = document.createElement('div');
+    el.className = 'glass toast';
+    el.innerHTML = `<span class="t-ic">${icon||'💰'}</span><span>${text}</span>`;
+    host.appendChild(el);
+    setTimeout(()=>{ el.style.opacity='0'; el.style.transition='opacity .4s ease'; setTimeout(()=>el.remove(),400); }, 3400);
+  }
+  function netAmount(e){ const gross = e.students*e.rate; return gross * (1 - (e.pct||0)/100); }
+
+  document.getElementById('slDate').value = todayIso();
+  attachDateShortcuts('slDate');
+
+  // ---------- Danh sách lớp (lưu sẵn đơn giá/%) ----------
+  function renderClassSelect(){
+    const sel = document.getElementById('slClassSelect');
+    const current = sel.value;
+    sel.innerHTML = '<option value="">— Chọn lớp đã lưu hoặc gõ mới bên dưới —</option>' +
+      savedClasses.map(c=>`<option value="${c.id}">${escapeHtml(c.name)} (${money(c.rate)}, ${c.pct}%)</option>`).join('');
+    if(savedClasses.some(c=>c.id===current)) sel.value = current;
+  }
+  document.getElementById('slClassSelect').addEventListener('change', function(){
+    const c = savedClasses.find(x=>x.id===this.value);
+    if(c){
+      document.getElementById('slClass').value = c.name;
+      document.getElementById('slRate').value = c.rate;
+      document.getElementById('slPercent').value = c.pct;
+    }
+  });
+
+  const classModal = document.getElementById('classManageBackdrop');
+  document.getElementById('slManageClassBtn').addEventListener('click', ()=>{ renderClassManageList(); classModal.classList.add('show'); });
+  document.getElementById('cmCloseBtn').addEventListener('click', ()=> classModal.classList.remove('show'));
+  classModal.addEventListener('click', e=>{ if(e.target===classModal) classModal.classList.remove('show'); });
+  function renderClassManageList(){
+    const list = document.getElementById('cmList');
+    if(savedClasses.length===0){ list.innerHTML = '<li class="empty-hint">Chưa có lớp nào được lưu.</li>'; return; }
+    list.innerHTML = '';
+    savedClasses.forEach(c=>{
+      const li = document.createElement('li');
+      li.className = 'overdue-item';
+      li.innerHTML = `<span class="od-text">${escapeHtml(c.name)} — ${money(c.rate)}/HS, gửi TT ${c.pct}%</span><button class="ttask-del" style="opacity:1;">✕</button>`;
+      li.querySelector('button').addEventListener('click', ()=>{ savedClasses = savedClasses.filter(x=>x.id!==c.id); renderClassManageList(); renderClassSelect(); });
+      list.appendChild(li);
+    });
+  }
+  document.getElementById('cmAddBtn').addEventListener('click', ()=>{
+    const name = document.getElementById('cmName').value.trim();
+    const rate = num(document.getElementById('cmRate').value);
+    const pct = num(document.getElementById('cmPercent').value);
+    if(!name || rate<=0){ toastS('Nhập tên lớp và đơn giá hợp lệ nhé.', '⚠'); return; }
+    savedClasses.push({ id:'cls'+(cmSeq++), name, rate, pct });
+    document.getElementById('cmName').value = '';
+    document.getElementById('cmRate').value = '';
+    document.getElementById('cmPercent').value = '';
+    renderClassManageList();
+    renderClassSelect();
+    toastS('Đã lưu lớp.', '⚙️');
+  });
+
+  document.getElementById('slAddBtn').addEventListener('click', ()=>{
+    const date = document.getElementById('slDate').value || todayIso();
+    const cls = document.getElementById('slClass').value.trim();
+    const students = num(document.getElementById('slStudents').value);
+    const rate = num(document.getElementById('slRate').value);
+    const pct = num(document.getElementById('slPercent').value);
+    if(!cls){ toastS('Nhập tên lớp nhé.', '⚠'); return; }
+    if(students<=0 || rate<=0){ toastS('Nhập số học sinh và đơn giá hợp lệ nhé.', '⚠'); return; }
+    if(pct<0 || pct>100){ toastS('% gửi trung tâm phải từ 0-100 nhé.', '⚠'); return; }
+    entries.push({ id:'sl'+(slSeq++), date, cls, students, rate, pct });
+    document.getElementById('slClass').value = '';
+    document.getElementById('slClassSelect').value = '';
+    document.getElementById('slStudents').value = '';
+    document.getElementById('slRate').value = '';
+    document.getElementById('slPercent').value = '';
+    renderSalary();
+    toastS('Đã thêm buổi dạy.', '💰');
+  });
+
+  document.getElementById('slPrevBtn').addEventListener('click', ()=>{ refMonth.setMonth(refMonth.getMonth()-1); renderSalary(); });
+  document.getElementById('slNextBtn').addEventListener('click', ()=>{ refMonth.setMonth(refMonth.getMonth()+1); renderSalary(); });
+  document.getElementById('slTodayBtn').addEventListener('click', ()=>{ refMonth = new Date(); renderSalary(); });
+
+  function renderSalary(){
+    const y = refMonth.getFullYear(), m = refMonth.getMonth();
+    document.getElementById('slMonthTitle').textContent = `Tháng ${m+1}/${y}`;
+    const ym = y + '-' + String(m+1).padStart(2,'0');
+
+    const monthEntries = entries.filter(e=>e.date.startsWith(ym)).sort((a,b)=>a.date.localeCompare(b.date));
+    const tbody = document.getElementById('slTableBody');
+    tbody.innerHTML = '';
+    if(monthEntries.length===0){
+      tbody.innerHTML = '<tr><td colspan="8" class="empty-hint" style="border:none;">Chưa có buổi dạy nào trong tháng này.</td></tr>';
+    } else {
+      monthEntries.forEach(e=>{
+        const gross = e.students * e.rate;
+        const net = netAmount(e);
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${formatVN(e.date)}</td>
+          <td>${escapeHtml(e.cls)}</td>
+          <td>${e.students}</td>
+          <td>${money(e.rate)}</td>
+          <td>${money(gross)}</td>
+          <td class="sl-pct">${e.pct||0}%</td>
+          <td class="sl-amount">${money(net)}</td>
+          <td><button class="sl-del">✕</button></td>`;
+        tr.querySelector('.sl-del').addEventListener('click', ()=>{ entries = entries.filter(x=>x.id!==e.id); renderSalary(); });
+        tbody.appendChild(tr);
+      });
+    }
+
+    const monthTotal = monthEntries.reduce((s,e)=>s+netAmount(e), 0);
+    document.getElementById('slMonthTotal').textContent = money(monthTotal);
+
+    const lifetimeTotal = entries.reduce((s,e)=>s+netAmount(e), 0);
+    document.getElementById('slLifetimeTotal').textContent = money(lifetimeTotal);
+  }
+
+  window.renderSalary = renderSalary;
+  window.__salary = {
+    exportData(){ return { entries, savedClasses }; },
+    importData(d){
+      entries = Array.isArray(d.entries) ? d.entries : [];
+      savedClasses = Array.isArray(d.savedClasses) ? d.savedClasses : [];
+      const maxS = entries.reduce((m,e)=>{ const n=parseInt(String(e.id).replace('sl',''),10); return isNaN(n)?m:Math.max(m,n); }, 0);
+      const maxC = savedClasses.reduce((m,c)=>{ const n=parseInt(String(c.id).replace('cls',''),10); return isNaN(n)?m:Math.max(m,n); }, 0);
+      slSeq = maxS+1; cmSeq = maxC+1;
+      renderClassSelect();
+      renderSalary();
+    }
+  };
+  renderClassSelect();
+  renderSalary();
+})();
+
+// ================= MEAL PLANS =================
+(function(){
+  function isoDate(d){ return d.toISOString().slice(0,10); }
+  function todayIso(){ return isoDate(new Date()); }
+  function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function num(v){ const n = parseFloat(String(v).replace(/[.,\s]/g,'')); return isNaN(n) ? 0 : n; }
+
+  const SLOTS = [
+    { key:'sang', label:'🌅 Sáng' }, { key:'phuSang', label:'🥐 Phụ sáng' },
+    { key:'chieu', label:'🍚 Trưa' }, { key:'phuChieu', label:'🍪 Phụ chiều' },
+    { key:'toi', label:'🌙 Tối' }, { key:'douong', label:'🥤 Đồ uống' }
+  ];
+
+  let library = [];  // {id, name, category, cal}
+  let mealPlan = {}; // { 'YYYY-MM-DD': { sang:{dishId,name,cal}, ... } }
+  let dishSeq = 1;
+  let libFilter = 'all';
+  let refWeek = new Date();
+  let pickerCtx = null; // {date, slotKey}
+  let pickerFilter = 'all';
+
+  function toastM(text, icon){
+    const host = document.getElementById('toastHost');
+    const el = document.createElement('div');
+    el.className = 'glass toast';
+    el.innerHTML = `<span class="t-ic">${icon||'🍽️'}</span><span>${text}</span>`;
+    host.appendChild(el);
+    setTimeout(()=>{ el.style.opacity='0'; el.style.transition='opacity .4s ease'; setTimeout(()=>el.remove(),400); }, 3400);
+  }
+  function distinctCategories(){
+    return [...new Set(library.map(d=>d.category).filter(Boolean))].sort();
+  }
+
+  // ---------- Thư viện món ăn ----------
+  document.getElementById('mpAddDishBtn').addEventListener('click', ()=>{
+    const name = document.getElementById('mpDishName').value.trim();
+    const category = document.getElementById('mpDishCat').value.trim() || 'Khác';
+    const cal = num(document.getElementById('mpDishCal').value);
+    if(!name){ toastM('Nhập tên món ăn nhé.', '⚠'); return; }
+    library.push({ id:'dish'+(dishSeq++), name, category, cal });
+    document.getElementById('mpDishName').value = '';
+    document.getElementById('mpDishCat').value = '';
+    document.getElementById('mpDishCal').value = '';
+    renderLibrary();
+    toastM('Đã thêm món vào thư viện.', '🍲');
+  });
+
+  function renderCatFilterRow(){
+    const row = document.getElementById('mpCatFilterRow');
+    const cats = distinctCategories();
+    row.innerHTML = `<button class="filter-chip ${libFilter==='all'?'active':''}" data-mpcat="all">Tất cả</button>` +
+      cats.map(c=>`<button class="filter-chip ${libFilter===c?'active':''}" data-mpcat="${escapeHtml(c)}">${escapeHtml(c)}</button>`).join('');
+    row.querySelectorAll('.filter-chip').forEach(chip=>{
+      chip.addEventListener('click', ()=>{ libFilter = chip.dataset.mpcat; renderLibrary(); });
+    });
+  }
+  function renderLibrary(){
+    renderCatFilterRow();
+    const suggest = document.getElementById('mpCatSuggest');
+    const cats = distinctCategories();
+    suggest.innerHTML = (cats.length ? cats : ['Chay','Mặn']).map(c=>`<option value="${escapeHtml(c)}">`).join('');
+    const list = document.getElementById('mpDishList');
+    const filtered = libFilter==='all' ? library : library.filter(d=>d.category===libFilter);
+    if(filtered.length===0){ list.innerHTML = '<li class="empty-hint">Chưa có món nào — thêm món ở trên nhé.</li>'; return; }
+    list.innerHTML = '';
+    filtered.forEach(d=>{
+      const li = document.createElement('li');
+      li.className = 'mp-dish-item';
+      li.innerHTML = `<span class="mp-cat-badge">${escapeHtml(d.category)}</span><span class="mp-dish-name">${escapeHtml(d.name)}</span><span class="mp-dish-cal">${d.cal} kcal</span><button class="mp-dish-del">✕</button>`;
+      li.querySelector('.mp-dish-del').addEventListener('click', ()=>{
+        library = library.filter(x=>x.id!==d.id);
+        renderLibrary();
+      });
+      list.appendChild(li);
+    });
+  }
+
+  // ---------- Lịch chọn món (tuần) ----------
+  function weekDays(){
+    const day = (refWeek.getDay()+6)%7;
+    const monday = new Date(refWeek); monday.setDate(refWeek.getDate()-day);
+    return [...Array(7)].map((_,i)=>{ const d=new Date(monday); d.setDate(monday.getDate()+i); return d; });
+  }
+  function dayTotal(date){
+    const plan = mealPlan[date];
+    if(!plan) return 0;
+    return SLOTS.reduce((s,sl)=> s + (plan[sl.key] ? plan[sl.key].cal : 0), 0);
+  }
+
+  function renderWeekTable(){
+    const days = weekDays();
+    document.getElementById('mpWeekTitle').textContent = `${days[0].getDate()}/${days[0].getMonth()+1} - ${days[6].getDate()}/${days[6].getMonth()+1}`;
+    const dowNames = ['T2','T3','T4','T5','T6','T7','CN'];
+
+    let html = '<thead><tr><th></th>' + days.map((d,i)=>`<th>${dowNames[i]}<br>${d.getDate()}/${d.getMonth()+1}</th>`).join('') + '</tr></thead><tbody>';
+    SLOTS.forEach(slot=>{
+      html += `<tr><td class="mp-slot-label">${slot.label}</td>`;
+      days.forEach(d=>{
+        const iso = isoDate(d);
+        const item = mealPlan[iso] && mealPlan[iso][slot.key];
+        html += `<td><div class="mp-cell ${item?'filled':''}" data-date="${iso}" data-slot="${slot.key}">
+          ${item ? `<span class="mp-cell-name">${escapeHtml(item.name)}</span><span class="mp-cell-cal">${item.cal} kcal</span>` : '+ Chọn'}
+        </div></td>`;
+      });
+      html += '</tr>';
+    });
+    html += `<tr><td class="mp-slot-label">Tổng calo</td>` + days.map(d=>`<td class="mp-day-total">${dayTotal(isoDate(d))} kcal</td>`).join('') + '</tr>';
+    html += '</tbody>';
+    document.getElementById('mpWeekTable').innerHTML = html;
+
+    document.querySelectorAll('.mp-cell').forEach(cell=>{
+      cell.addEventListener('click', ()=> openPicker(cell.dataset.date, cell.dataset.slot));
+    });
+  }
+
+  document.getElementById('mpPrevBtn').addEventListener('click', ()=>{ refWeek.setDate(refWeek.getDate()-7); renderWeekTable(); });
+  document.getElementById('mpNextBtn').addEventListener('click', ()=>{ refWeek.setDate(refWeek.getDate()+7); renderWeekTable(); });
+  document.getElementById('mpTodayBtn').addEventListener('click', ()=>{ refWeek = new Date(); renderWeekTable(); });
+
+  // ---------- Modal chọn món cho 1 ô ----------
+  const pickerModal = document.getElementById('mpPickerBackdrop');
+  function openPicker(date, slotKey){
+    pickerCtx = { date, slotKey };
+    pickerFilter = 'all';
+    const slotLabel = SLOTS.find(s=>s.key===slotKey).label;
+    document.getElementById('mpPickerTitle').textContent = `Chọn món — ${slotLabel} ngày ${date.slice(8,10)}/${date.slice(5,7)}`;
+    renderPickerCatRow();
+    renderPickerList();
+    pickerModal.classList.add('show');
+  }
+  function renderPickerCatRow(){
+    const row = document.getElementById('mpPickerCatRow');
+    const cats = distinctCategories();
+    row.innerHTML = `<button class="filter-chip ${pickerFilter==='all'?'active':''}" data-mppcat="all">Tất cả</button>` +
+      cats.map(c=>`<button class="filter-chip ${pickerFilter===c?'active':''}" data-mppcat="${escapeHtml(c)}">${escapeHtml(c)}</button>`).join('');
+    row.querySelectorAll('.filter-chip').forEach(chip=>{
+      chip.addEventListener('click', ()=>{ pickerFilter = chip.dataset.mppcat; renderPickerCatRow(); renderPickerList(); });
+    });
+  }
+  function renderPickerList(){
+    const list = document.getElementById('mpPickerList');
+    const filtered = pickerFilter==='all' ? library : library.filter(d=>d.category===pickerFilter);
+    if(filtered.length===0){ list.innerHTML = '<li class="empty-hint">Thư viện chưa có món nào khớp — thêm món ở panel bên trái nhé.</li>'; return; }
+    list.innerHTML = '';
+    filtered.forEach(d=>{
+      const li = document.createElement('li');
+      li.className = 'mp-dish-item pickable';
+      li.innerHTML = `<span class="mp-cat-badge">${escapeHtml(d.category)}</span><span class="mp-dish-name">${escapeHtml(d.name)}</span><span class="mp-dish-cal">${d.cal} kcal</span>`;
+      li.addEventListener('click', ()=>{
+        const { date, slotKey } = pickerCtx;
+        mealPlan[date] = mealPlan[date] || {};
+        mealPlan[date][slotKey] = { dishId:d.id, name:d.name, cal:d.cal };
+        pickerModal.classList.remove('show');
+        renderWeekTable();
+        linkDateToWeightTab(date);
+        toastM('Đã chọn món cho bữa này, tự liên kết sang trang Cân Nặng.', '🍽️');
+      });
+      list.appendChild(li);
+    });
+  }
+  document.getElementById('mpPickerClear').addEventListener('click', ()=>{
+    if(!pickerCtx) return;
+    const { date, slotKey } = pickerCtx;
+    if(mealPlan[date]) delete mealPlan[date][slotKey];
+    pickerModal.classList.remove('show');
+    renderWeekTable();
+    linkDateToWeightTab(date);
+  });
+  document.getElementById('mpPickerCancel').addEventListener('click', ()=> pickerModal.classList.remove('show'));
+  pickerModal.addEventListener('click', e=>{ if(e.target===pickerModal) pickerModal.classList.remove('show'); });
+
+  // ---------- Liên kết sang trang Cân Nặng ----------
+  // tự động liên kết 1 ngày ngay khi chọn/xóa món (không cần bấm nút);
+  // nút dưới đây dùng để liên kết lại toàn bộ tuần cùng lúc, phòng khi cần đồng loạt làm mới
+  function linkDateToWeightTab(iso){
+    if(!window.__weight) return;
+    const plan = mealPlan[iso] || {};
+    const vals = {};
+    SLOTS.forEach(sl=>{ vals[sl.key] = plan[sl.key] ? plan[sl.key].cal : 0; });
+    window.__weight.mergeCalorieForDate(iso, vals);
+  }
+  document.getElementById('mpSyncBtn').addEventListener('click', ()=>{
+    if(!window.__weight){ toastM('Chưa sẵn sàng, thử lại sau nhé.', '⚠'); return; }
+    weekDays().forEach(d=> linkDateToWeightTab(isoDate(d)));
+    toastM('Đã liên kết lại toàn bộ tuần sang trang Cân Nặng.', '🔗');
+  });
+
+  function renderAllMP(){ renderLibrary(); renderWeekTable(); }
+
+  window.renderMealPlans = renderAllMP;
+  window.__mealplans = {
+    exportData(){ return { library, mealPlan }; },
+    importData(d){
+      library = Array.isArray(d.library) ? d.library : [];
+      mealPlan = (d.mealPlan && typeof d.mealPlan==='object') ? d.mealPlan : {};
+      const maxD = library.reduce((m,x)=>{ const n=parseInt(String(x.id).replace('dish',''),10); return isNaN(n)?m:Math.max(m,n); }, 0);
+      dishSeq = maxD+1;
+      renderAllMP();
+    }
+  };
+  renderAllMP();
+})();
+
+// ================= HÔM NAY (tổng hợp) =================
+(function(){
+  function todayIso(){ return new Date().toISOString().slice(0,10); }
+  function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  function renderTodayOverview(){
+    const today = todayIso();
+
+    // Việc cần làm hôm nay: task Kanban ở Cần làm/Đang làm, ưu tiên có deadline hôm nay, tối đa 5 dòng
+    const taskEl = document.getElementById('todayTasks');
+    const kTasks = (window.__planner && window.__planner.tasks) ? window.__planner.tasks.filter(t=>(t.status||'todo')!=='done') : [];
+    const dueToday = kTasks.filter(t=>t.deadline===today);
+    const rest = kTasks.filter(t=>t.deadline!==today).slice(0, Math.max(0,5-dueToday.length));
+    const showTasks = [...dueToday, ...rest].slice(0,5);
+    taskEl.innerHTML = showTasks.length
+      ? showTasks.map(t=>`<div class="today-item">${t.deadline===today?'📅 ':''}${escapeHtml(t.text)}</div>`).join('')
+      : '<div class="today-empty">Không có việc nào đang chờ.</div>';
+
+    // Tâm Đạo hôm nay
+    const tdEl = document.getElementById('todayTamDao');
+    const tdItems = (window.__tamdao && window.__tamdao.exportData) ? window.__tamdao.exportData().items.filter(it=>it.date===today) : [];
+    tdEl.innerHTML = tdItems.length
+      ? tdItems.map(it=>`<div class="today-item">${it.done?'✅ ':''}${escapeHtml(it.title)}</div>`).join('')
+      : '<div class="today-empty">Không có mốc nào hôm nay.</div>';
+
+    // Bữa ăn đã lên kế hoạch hôm nay
+    const mealEl = document.getElementById('todayMeals');
+    const SLOT_LABEL = { sang:'🌅', phuSang:'🥐', chieu:'🍚', phuChieu:'🍪', toi:'🌙', douong:'🥤' };
+    const plan = (window.__mealplans && window.__mealplans.exportData) ? (window.__mealplans.exportData().mealPlan[today] || {}) : {};
+    const slots = Object.keys(plan);
+    mealEl.innerHTML = slots.length
+      ? slots.map(k=>`<div class="today-item">${SLOT_LABEL[k]||''} ${escapeHtml(plan[k].name)} · ${plan[k].cal} kcal</div>`).join('')
+      : '<div class="today-empty">Chưa lên kế hoạch bữa nào.</div>';
+  }
+
+  window.renderTodayOverview = renderTodayOverview;
+  setTimeout(renderTodayOverview, 50); // hoãn tới khi mọi module đã expose xong
 })();
 
 // ================= ĐĂNG KÝ SERVICE WORKER (cài đặt PWA + chạy offline) =================
