@@ -43,35 +43,49 @@
   .app-shell-layout{ display:flex; min-height:100vh; position:relative; z-index:2; }
 
   .sidebar-nav{
-    width:270px; flex-shrink:0; position:sticky; top:0; height:100vh; overflow-y:auto;
-    display:flex; flex-direction:column; padding:24px 16px;
+    width:76px; flex-shrink:0; position:sticky; top:0; height:100vh; overflow-y:visible;
+    display:flex; flex-direction:column; align-items:center; padding:24px 12px;
     background:var(--glass); border-right:1.5px solid var(--glass-border);
   }
   .main-content{ flex:1; min-width:0; }
   .shell{ position:relative; z-index:2; max-width:1240px; margin:0 auto; padding:26px 22px 60px; min-height:60vh; }
 
-  .brand{ display:flex; align-items:center; gap:10px; font-size:22px; font-weight:700; letter-spacing:-.01em; color:var(--text-hi); padding:0 6px; margin-bottom:22px; }
-  .brand .mark{ width:34px; height:34px; border-radius:10px; background:var(--accent); display:flex; align-items:center; justify-content:center; font-size:19.5px; flex-shrink:0; }
+  .brand{ display:flex; align-items:center; justify-content:center; color:var(--text-hi); margin-bottom:22px; }
+  .brand .mark{ width:38px; height:38px; border-radius:11px; background:var(--accent); display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
 
-  .app-nav{ display:flex; flex-direction:column; gap:4px; flex:1; }
+  .app-nav{ display:flex; flex-direction:column; gap:6px; flex:1; width:100%; align-items:center; }
   .nav-tab{
+    position:relative;
     border:none; background:transparent; color:var(--text-lo); font-family:'Inter',sans-serif;
-    font-size:15.5px; font-weight:700; padding:12px 14px; border-radius:11px; cursor:pointer;
-    display:flex; align-items:center; gap:10px; transition:all .18s ease; text-align:left; width:100%;
+    font-size:21px; cursor:pointer;
+    width:52px; height:52px; border-radius:13px;
+    display:flex; align-items:center; justify-content:center; transition:all .18s ease;
   }
+  .nav-tab-label{
+    position:absolute; left:64px; top:50%; transform:translateY(-50%);
+    background:var(--text-hi); color:#fff; font-size:13px; font-weight:600;
+    padding:7px 12px; border-radius:9px; white-space:nowrap;
+    opacity:0; pointer-events:none; transition:opacity .15s ease; z-index:50;
+    box-shadow:0 6px 18px rgba(20,24,31,.2);
+  }
+  .nav-tab:hover .nav-tab-label{ opacity:1; }
   .nav-tab:hover{ background:var(--glass-strong); }
   .nav-tab.active{ background:var(--accent); color:#fff; font-weight:700; }
-  .sidebar-footer{ display:flex; flex-direction:column; gap:10px; margin-top:16px; padding-top:16px; border-top:1.5px solid var(--glass-border); }
-  .sidebar-footer .pill{ justify-content:center; }
+  .sidebar-footer{ display:flex; flex-direction:column; align-items:center; gap:10px; margin-top:16px; padding-top:16px; border-top:1.5px solid var(--glass-border); width:100%; }
+  .sidebar-footer .pill{ justify-content:center; font-size:0; padding:8px; width:36px; height:36px; border-radius:50%; }
+  .sidebar-footer .pill .dot{ margin:0; }
+  .sidebar-footer .pill span#syncStatusPill{ display:none; }
+  .sidebar-footer #openBackup{ width:36px; height:36px; padding:0; border-radius:50%; font-size:15px; }
   .tab-section{ display:none; }
   .tab-section.active{ display:block; }
 
   @media (max-width:860px){
     .app-shell-layout{ flex-direction:column; }
-    .sidebar-nav{ width:100%; height:auto; position:relative; flex-direction:row; flex-wrap:wrap; align-items:center; gap:10px; }
+    .sidebar-nav{ width:100%; height:auto; position:relative; flex-direction:row; flex-wrap:wrap; align-items:center; gap:10px; padding:14px 16px; }
     .brand{ margin-bottom:0; }
-    .app-nav{ flex-direction:row; flex-wrap:wrap; }
-    .sidebar-footer{ flex-direction:row; margin-top:0; padding-top:0; border-top:none; border-left:1.5px solid var(--glass-border); padding-left:14px; }
+    .app-nav{ flex-direction:row; flex-wrap:wrap; width:auto; }
+    .sidebar-footer{ flex-direction:row; margin-top:0; padding-top:0; border-top:none; border-left:1.5px solid var(--glass-border); padding-left:14px; width:auto; }
+    .nav-tab-label{ display:none; }
   }
 
   .pill{ display:flex; align-items:center; gap:7px; background:var(--glass); border:1.5px solid var(--glass-border); padding:8px 15px; border-radius:100px; font-size:16.5px; color:var(--text-lo); }
@@ -386,6 +400,23 @@
   .sl-month-total{ display:flex; justify-content:space-between; align-items:center; margin-top:16px; padding-top:16px; border-top:1.5px solid var(--glass-border); font-size:17px; font-weight:700; }
   .sl-month-total span:last-child{ font-size:22px; color:var(--accent); font-family:'Sora',sans-serif; }
 
+  /* biểu đồ tròn % theo lớp */
+  .sl-pie-legend{ display:flex; flex-direction:column; gap:8px; }
+  .sl-pie-legend-row{ display:flex; align-items:center; gap:8px; font-size:13.5px; }
+  .sl-pie-swatch{ width:12px; height:12px; border-radius:4px; flex-shrink:0; }
+  .sl-pie-legend-name{ flex:1; }
+  .sl-pie-legend-pct{ font-weight:700; color:var(--text-hi); }
+
+  /* biểu đồ cột doanh thu 12 tháng */
+  .sl-bar-chart{ display:flex; align-items:flex-end; gap:6px; height:180px; padding-top:20px; }
+  .sl-bar-col{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; min-width:0; }
+  .sl-bar-value{ font-size:9.5px; color:var(--text-lo); margin-bottom:4px; white-space:nowrap; }
+  .sl-bar{ width:100%; border-radius:6px 6px 0 0; transition:height .3s ease; }
+  .sl-bar.up{ background:var(--teal); }
+  .sl-bar.down{ background:var(--danger); }
+  .sl-bar.flat{ background:var(--text-lo); }
+  .sl-bar-label{ font-size:10px; color:var(--text-lo); margin-top:6px; white-space:nowrap; }
+
   /* ================ MEAL PLANS ================ */
   .mp-dish-item{ display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:11px; background:var(--glass-strong); font-size:14.5px; margin-bottom:6px; }
   .mp-dish-item .mp-cat-badge{ font-size:11px; font-weight:700; padding:3px 9px; border-radius:100px; background:var(--accent); color:#fff; flex-shrink:0; }
@@ -433,17 +464,16 @@
 
 <div class="app-shell-layout">
   <nav class="sidebar-nav">
-    <div class="brand"><span class="mark">🗓️</span> Flow</div>
     <div class="app-nav">
-      <button class="nav-tab active" data-tab="tabWorkspace">☀️ Không Gian Làm Việc</button>
-      <button class="nav-tab" data-tab="tabPlanner">🗓️ Kế Hoạch &amp; Lịch Làm Việc</button>
-      <button class="nav-tab" data-tab="tabStats">📊 Thống Kê Hiệu Quả</button>
-      <button class="nav-tab" data-tab="tabWeight">⚖️ Kiểm Soát Cân Nặng</button>
-      <button class="nav-tab" data-tab="tabTamDao">🙏 Tâm Đạo</button>
-      <button class="nav-tab" data-tab="tabGoodDeeds">🌱 Nhật Ký Việc Tốt</button>
-      <button class="nav-tab" data-tab="tabSalary">💰 Tính Lương</button>
-      <button class="nav-tab" data-tab="tabMealPlans">🍽️ Meal Plans</button>
-      <button class="nav-tab" data-tab="tabGratitude">💝 Tri Ân</button>
+      <button class="nav-tab active" data-tab="tabWorkspace" title="Không Gian Làm Việc">☀️<span class="nav-tab-label">Không Gian Làm Việc</span></button>
+      <button class="nav-tab" data-tab="tabPlanner" title="Kế Hoạch &amp; Lịch Làm Việc">🗓️<span class="nav-tab-label">Kế Hoạch &amp; Lịch Làm Việc</span></button>
+      <button class="nav-tab" data-tab="tabStats" title="Thống Kê Hiệu Quả">📊<span class="nav-tab-label">Thống Kê Hiệu Quả</span></button>
+      <button class="nav-tab" data-tab="tabWeight" title="Kiểm Soát Cân Nặng">⚖️<span class="nav-tab-label">Kiểm Soát Cân Nặng</span></button>
+      <button class="nav-tab" data-tab="tabTamDao" title="Tâm Đạo">🙏<span class="nav-tab-label">Tâm Đạo</span></button>
+      <button class="nav-tab" data-tab="tabGoodDeeds" title="Nhật Ký Việc Tốt">🌱<span class="nav-tab-label">Nhật Ký Việc Tốt</span></button>
+      <button class="nav-tab" data-tab="tabSalary" title="Tính Lương">💰<span class="nav-tab-label">Tính Lương</span></button>
+      <button class="nav-tab" data-tab="tabMealPlans" title="Meal Plans">🍽️<span class="nav-tab-label">Meal Plans</span></button>
+      <button class="nav-tab" data-tab="tabGratitude" title="Tri Ân">💝<span class="nav-tab-label">Tri Ân</span></button>
     </div>
     <div class="sidebar-footer">
       <div class="pill"><span class="dot"></span><span id="syncStatusPill">Đang lưu...</span></div>
@@ -1008,6 +1038,21 @@
   <div class="glass stat-card accent" style="margin-bottom:18px;">
     <div class="stat-label">Tổng lương thực nhận lũy kế toàn thời gian</div>
     <div class="stat-value" id="slLifetimeTotal">0 đ</div>
+  </div>
+
+  <div class="stats-row" style="margin-bottom:18px;">
+    <div class="glass panel">
+      <h2><span class="t">🥧 Tỷ lệ lương theo lớp</span></h2>
+      <div id="slPieWrap" style="min-height:220px; display:flex; align-items:center; justify-content:center; gap:20px; flex-wrap:wrap;">
+        <div class="empty-hint">Chưa có dữ liệu.</div>
+      </div>
+    </div>
+    <div class="glass panel">
+      <h2><span class="t">📊 Doanh thu 12 tháng gần nhất</span></h2>
+      <div id="slBarWrap" style="min-height:220px;">
+        <div class="empty-hint">Chưa có dữ liệu.</div>
+      </div>
+    </div>
   </div>
 
   <div class="glass panel" style="margin-bottom:18px;">
@@ -2360,7 +2405,7 @@ document.querySelectorAll('.nav-tab').forEach(btn=>{
       const ts = 'Đã đồng bộ lúc ' + new Date().toLocaleTimeString('vi-VN');
       setSyncStatus(ts);
       const pill = document.getElementById('syncStatusPill');
-      if(pill) pill.textContent = '☁️ ' + ts;
+      if(pill){ pill.textContent = '☁️ ' + ts; const w = pill.closest('.pill'); if(w) w.title = '☁️ ' + ts; }
       if(!silent) toastB('Đã tải dữ liệu lên đám mây.', '☁️');
     }catch(err){
       if(!silent){ setSyncStatus(''); toastB('Lỗi tải lên: ' + err.message, '⚠'); }
@@ -2396,6 +2441,8 @@ document.querySelectorAll('.nav-tab').forEach(btn=>{
   function updatePillStatus(text){
     const el = document.getElementById('syncStatusPill');
     if(el) el.textContent = text;
+    const pillWrap = el ? el.closest('.pill') : null;
+    if(pillWrap) pillWrap.title = text;
   }
 
   function saveLocalAutosave(){
@@ -3253,6 +3300,67 @@ Hãy giúp tôi:
 
     const lifetimeTotal = entries.reduce((s,e)=>s+netAmount(e), 0);
     document.getElementById('slLifetimeTotal').textContent = money(lifetimeTotal);
+
+    renderClassPie();
+    renderMonthlyBarChart();
+  }
+
+  // ---------- Biểu đồ tròn: tỷ lệ lương theo lớp ----------
+  function classColor(i){ return `hsl(${Math.round((i*137.508)%360)}, 55%, 52%)`; }
+  function renderClassPie(){
+    const wrap = document.getElementById('slPieWrap');
+    const byClass = {};
+    entries.forEach(e=>{ byClass[e.cls] = (byClass[e.cls]||0) + netAmount(e); });
+    const rows = Object.keys(byClass).map(cls=>({ cls, amount: byClass[cls] })).filter(r=>r.amount>0).sort((a,b)=>b.amount-a.amount);
+    if(rows.length===0){ wrap.innerHTML = '<div class="empty-hint">Chưa có dữ liệu.</div>'; return; }
+    const total = rows.reduce((s,r)=>s+r.amount, 0);
+
+    const R = 70, C = 2*Math.PI*R;
+    let offset = 0;
+    const segs = rows.map((r,i)=>{
+      const frac = r.amount/total;
+      const seg = `<circle cx="90" cy="90" r="${R}" fill="none" stroke="${classColor(i)}" stroke-width="34"
+        stroke-dasharray="${frac*C} ${C-frac*C}" stroke-dashoffset="${-offset}" transform="rotate(-90 90 90)"/>`;
+      offset += frac*C;
+      return seg;
+    }).join('');
+
+    const svg = `<svg width="180" height="180" viewBox="0 0 180 180">${segs}</svg>`;
+    const legend = `<div class="sl-pie-legend">` + rows.map((r,i)=>`
+      <div class="sl-pie-legend-row">
+        <span class="sl-pie-swatch" style="background:${classColor(i)}"></span>
+        <span class="sl-pie-legend-name">${escapeHtml(r.cls)}</span>
+        <span class="sl-pie-legend-pct">${Math.round(r.amount/total*100)}%</span>
+      </div>`).join('') + `</div>`;
+    wrap.innerHTML = svg + legend;
+  }
+
+  // ---------- Biểu đồ cột: doanh thu 12 tháng gần nhất ----------
+  function renderMonthlyBarChart(){
+    const wrap = document.getElementById('slBarWrap');
+    const now = new Date();
+    const months = [];
+    for(let i=11; i>=0; i--){
+      const d = new Date(now.getFullYear(), now.getMonth()-i, 1);
+      months.push({ ym: d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'), label: `T${d.getMonth()+1}` });
+    }
+    const totals = months.map(mo => entries.filter(e=>e.date.startsWith(mo.ym)).reduce((s,e)=>s+netAmount(e), 0));
+    if(totals.every(v=>v===0)){ wrap.innerHTML = '<div class="empty-hint">Chưa có dữ liệu.</div>'; return; }
+    const max = Math.max(...totals, 1);
+
+    let html = '<div class="sl-bar-chart">';
+    totals.forEach((v,i)=>{
+      const heightPct = Math.max((v/max*100), v>0?4:0);
+      let trend = 'flat';
+      if(i>0){ if(v > totals[i-1]) trend='up'; else if(v < totals[i-1]) trend='down'; }
+      html += `<div class="sl-bar-col">
+        <div class="sl-bar-value">${v>0 ? Math.round(v/1000)+'k' : ''}</div>
+        <div class="sl-bar ${trend}" style="height:${heightPct}%"></div>
+        <div class="sl-bar-label">${months[i].label}</div>
+      </div>`;
+    });
+    html += '</div>';
+    wrap.innerHTML = html;
   }
 
   window.renderSalary = renderSalary;
