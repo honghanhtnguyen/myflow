@@ -43,26 +43,26 @@
   .app-shell-layout{ display:flex; min-height:100vh; position:relative; z-index:2; }
 
   .sidebar-nav{
-    width:76px; flex-shrink:0; position:sticky; top:0; height:100vh; overflow-y:visible;
-    display:flex; flex-direction:column; align-items:center; padding:24px 12px;
+    width:88px; flex-shrink:0; position:sticky; top:0; height:100vh; overflow-y:visible;
+    display:flex; flex-direction:column; align-items:center; padding:20px 14px;
     background:var(--glass); border-right:1.5px solid var(--glass-border);
   }
   .main-content{ flex:1; min-width:0; }
   .shell{ position:relative; z-index:2; max-width:1240px; margin:0 auto; padding:26px 22px 60px; min-height:60vh; }
 
-  .brand{ display:flex; align-items:center; justify-content:center; color:var(--text-hi); margin-bottom:22px; }
-  .brand .mark{ width:38px; height:38px; border-radius:11px; background:var(--accent); display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+  .brand{ display:flex; align-items:center; justify-content:center; color:var(--text-hi); margin-bottom:16px; }
+  .brand .mark{ width:32px; height:32px; border-radius:9px; background:var(--accent); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
 
-  .app-nav{ display:flex; flex-direction:column; gap:6px; flex:1; width:100%; align-items:center; }
+  .app-nav{ display:flex; flex-direction:column; gap:3px; flex:1; width:100%; align-items:center; }
   .nav-tab{
     position:relative;
     border:none; background:transparent; color:var(--text-lo); font-family:'Inter',sans-serif;
-    font-size:21px; cursor:pointer;
-    width:52px; height:52px; border-radius:13px;
+    font-size:16px; cursor:pointer;
+    width:44px; height:44px; border-radius:11px;
     display:flex; align-items:center; justify-content:center; transition:all .18s ease;
   }
   .nav-tab-label{
-    position:absolute; left:64px; top:50%; transform:translateY(-50%);
+    position:absolute; left:56px; top:50%; transform:translateY(-50%);
     background:var(--text-hi); color:#fff; font-size:13px; font-weight:600;
     padding:7px 12px; border-radius:9px; white-space:nowrap;
     opacity:0; pointer-events:none; transition:opacity .15s ease; z-index:50;
@@ -201,7 +201,7 @@
 
   .filter-row{ display:flex; gap:6px; margin-bottom:14px; flex-wrap:wrap; }
   .filter-chip{ font-size:15px; padding:6px 12px; border-radius:100px; border:1.5px solid var(--glass-border); background:var(--glass-strong); color:var(--text-lo); cursor:pointer; }
-  .filter-chip.active{ color:#fff; font-weight:700; border-color:transparent; }
+  .filter-chip.active{ color:#fff; font-weight:700; border-color:transparent; background:var(--accent); }
   .filter-chip[data-u="all"].active{ background:var(--text-hi); }
   .filter-chip[data-u="critical"].active{ background:var(--u-critical); }
   .filter-chip[data-u="high"].active{ background:var(--u-high); }
@@ -236,7 +236,7 @@
 
   .month-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:6px; }
   .dow{ font-size:15px; color:var(--text-lo); text-align:center; padding-bottom:6px; font-weight:700; }
-  .day-cell{ min-height:100px; border-radius:12px; background:var(--glass-strong); border:1.5px solid var(--glass-border); padding:7px; display:flex; flex-direction:column; gap:4px; transition:background .15s ease, border-color .15s ease; }
+  .day-cell{ min-height:112px; border-radius:12px; background:var(--glass-strong); border:1.5px solid var(--glass-border); padding:7px; display:flex; flex-direction:column; gap:4px; transition:background .15s ease, border-color .15s ease; }
   .day-cell.other-month{ opacity:.4; }
   .day-cell.today{ border-color:var(--accent); border-width:2px; }
   .day-cell.drop-hover{ background:var(--accent-tint); border-color:var(--accent); }
@@ -257,9 +257,9 @@
   .hour-label{ font-size:13px; color:var(--text-lo); text-align:right; padding-right:6px; padding-top:2px; }
   .week-body{ display:flex; gap:5px; }
   .week-hourcol{ width:56px; flex-shrink:0; }
-  .week-hourcol .hour-label{ height:40px; font-size:11.5px; color:var(--text-lo); text-align:right; padding-right:6px; box-sizing:border-box; padding-top:2px; }
+  .week-hourcol .hour-label{ height:54px; font-size:11.5px; color:var(--text-lo); text-align:right; padding-right:6px; box-sizing:border-box; padding-top:2px; }
   .week-daycol{ flex:1; position:relative; min-width:0; }
-  .hour-cell{ height:40px; box-sizing:border-box; border-top:1px solid var(--glass-border); position:relative; transition:background .15s ease; }
+  .hour-cell{ height:54px; box-sizing:border-box; border-top:1px solid var(--glass-border); position:relative; transition:background .15s ease; }
   .hour-cell:first-child{ border-top:none; }
   .hour-cell.drop-hover{ background:var(--accent-tint); }
   .week-evt-block{
@@ -455,6 +455,103 @@
   .gr-dates{ font-size:13px; color:var(--text-lo); margin-top:5px; margin-left:30px; }
   .gr-note{ font-size:13px; color:var(--text-lo); margin-top:4px; margin-left:30px; font-style:italic; }
 
+  /* ================ NOTES (kiểu Apple Notes) ================ */
+  .notes-app{ display:flex; gap:16px; height:calc(100vh - 100px); min-height:520px; }
+
+  .notes-list-pane{
+    width:320px; flex-shrink:0; display:flex; flex-direction:column;
+    background:#3C333A; border:1.5px solid rgba(0,0,0,0.2); border-radius:20px;
+    box-shadow:0 8px 22px -8px rgba(20,16,20,.4); overflow:hidden;
+  }
+  .notes-list-header{ display:flex; align-items:center; gap:8px; padding:14px 14px 10px; }
+  .notes-search-wrap{ flex:1; }
+  .notes-search-wrap input{
+    width:100%; background:#fff; border:1px solid rgba(0,0,0,0.15); border-radius:10px;
+    padding:9px 12px; color:var(--text-hi); font-size:14px;
+  }
+  .notes-search-wrap input::placeholder{ color:var(--text-lo); }
+  .notes-list-toolbar{ display:flex; gap:2px; flex-shrink:0; }
+  .notes-icon-btn{ background:none; border:none; cursor:pointer; font-size:17px; width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; transition:background .15s ease; }
+  .notes-icon-btn:hover{ background:rgba(255,255,255,.12); }
+  .notes-icon-btn.on{ background:var(--accent); box-shadow:0 0 0 2px rgba(255,255,255,.25); }
+
+  .notes-list{ flex:1; overflow-y:auto; padding:4px 10px 14px; }
+  .note-row{ padding:10px 10px; border-radius:10px; cursor:pointer; border:1.5px solid transparent; margin-bottom:3px; }
+  .note-row:hover{ background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.1); }
+  .note-row.selected{ background:var(--accent); border-color:var(--accent); }
+  .note-row.selected .note-row-title, .note-row.selected .note-row-meta, .note-row.selected .note-row-snippet{ color:#fff; }
+  .note-row-title{ font-weight:700; font-size:14.5px; display:flex; align-items:center; gap:5px; margin-bottom:3px; color:#FFFFFF; }
+  .note-row-meta{ font-size:12px; color:#B3A8AF; display:flex; gap:6px; }
+  .note-row-snippet{ font-size:12px; color:#B3A8AF; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .note-row-empty{ text-align:center; padding:30px 14px; color:#B3A8AF; font-size:13px; }
+
+  .notes-detail-pane{
+    flex:1; display:flex; flex-direction:column; background:#fff; min-width:0; position:relative;
+    border:1.5px solid var(--glass-border); border-radius:20px; box-shadow:0 8px 22px -8px rgba(20,24,31,.14); overflow:hidden;
+  }
+  .notes-detail-empty{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--text-lo); font-size:14px; text-align:center; padding:40px; }
+  .notes-detail-content{ flex:1; display:flex; flex-direction:column; padding:8px 34px 24px; min-height:0; }
+  .notes-detail-toolbar{ display:flex; align-items:center; gap:2px; padding:8px 0; flex-shrink:0; }
+  .notes-updated-label{ font-size:12px; color:var(--text-lo); }
+  .notes-title-input{ border:none; background:transparent; font-family:'Sora',sans-serif; font-size:24px; font-weight:700; color:var(--text-hi); padding:8px 0 2px; outline:none; flex-shrink:0; }
+  .notes-tags-input{ border:none; background:transparent; font-size:13px; color:var(--accent); font-weight:600; padding:0 0 10px; outline:none; flex-shrink:0; border-bottom:1px solid var(--glass-border); margin-bottom:10px; }
+  .notes-content-input{ border:none; background:transparent; flex:1; resize:none; outline:none; font-size:15.5px; line-height:1.7; color:var(--text-hi); font-family:'Inter',sans-serif; min-height:200px; }
+
+  .notes-confirm-box{
+    position:absolute; top:44px; right:34px; background:var(--text-hi); color:#fff; border-radius:12px;
+    padding:12px 14px; box-shadow:0 10px 26px rgba(20,24,31,.28); z-index:20; font-size:13px;
+    display:none; align-items:center; gap:10px;
+  }
+  .notes-confirm-box.show{ display:flex; }
+  .notes-confirm-box button{ border:none; border-radius:8px; padding:6px 12px; font-size:12.5px; font-weight:700; cursor:pointer; }
+  .notes-confirm-box .nc-yes{ background:var(--danger); color:#fff; }
+  .notes-confirm-box .nc-no{ background:rgba(255,255,255,.15); color:#fff; }
+
+  .idea-item{ display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:11px; background:var(--glass-strong); margin-bottom:6px; font-size:14.5px; }
+  .idea-item .idea-text{ flex:1; }
+  .idea-item .idea-btn{ background:none; border:1.5px solid var(--glass-border); border-radius:8px; width:30px; height:30px; cursor:pointer; font-size:13px; flex-shrink:0; }
+  .idea-item .idea-btn.keep:hover{ background:var(--teal); border-color:var(--teal); }
+  .idea-item .idea-btn.discard:hover{ background:var(--danger); border-color:var(--danger); }
+  .idea-item.kept{ opacity:.75; }
+
+  @media (max-width:760px){
+    .notes-app{ flex-direction:column; height:auto; }
+    .notes-list-pane{ width:100%; max-height:340px; }
+  }
+
+  /* ================ DAILY ROUTINE ================ */
+  .rt-item{ display:flex; align-items:center; gap:9px; padding:10px 11px; border-radius:12px; margin-bottom:6px; }
+  .rt-item:hover{ background:var(--glass-strong); }
+  .rt-check{ width:22px; height:22px; border-radius:7px; border:2px solid var(--text-lo); cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .rt-check.on{ background:var(--teal); border-color:var(--teal); }
+  .rt-check.on::after{ content:"✓"; font-size:13px; color:#fff; font-weight:700; }
+  .rt-text{ flex:1; font-size:15px; cursor:pointer; }
+  .rt-item.done .rt-text{ color:var(--text-lo); text-decoration:line-through; }
+  .rt-del{ background:none; border:none; color:var(--text-lo); cursor:pointer; font-size:14px; opacity:0; }
+  .rt-item:hover .rt-del{ opacity:1; }
+
+  /* ================ HỌC TẬP ================ */
+  .lg-card{ background:var(--glass-strong); border:1.5px solid var(--glass-border); border-radius:14px; padding:16px; margin-bottom:12px; cursor:pointer; transition:border-color .15s ease; }
+  .lg-card:hover{ border-color:var(--accent); }
+  .lg-card-top{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .lg-type-badge{ font-size:11px; font-weight:700; padding:3px 10px; border-radius:100px; background:var(--accent); color:#fff; }
+  .lg-name{ font-weight:700; font-size:15.5px; flex:1; }
+  .lg-percent{ font-weight:700; color:var(--accent); font-size:14px; }
+  .lg-note{ font-size:13px; color:var(--text-lo); margin-top:8px; }
+
+  /* ================ MONTHLY ================ */
+  .mo-card{ display:flex; align-items:center; gap:14px; background:var(--glass-strong); border:1.5px solid var(--glass-border); border-radius:14px; padding:14px 16px; margin-bottom:10px; }
+  .mo-card.overdue{ border-color:var(--danger); background:rgba(225,77,77,.08); }
+  .mo-info{ flex:1; cursor:pointer; }
+  .mo-name{ font-weight:700; font-size:15.5px; }
+  .mo-sub{ font-size:13px; color:var(--text-lo); margin-top:3px; }
+  .mo-card.overdue .mo-sub{ color:var(--danger); font-weight:600; }
+  .mo-done-btn{ flex-shrink:0; }
+
+  /* ================ TÙY CHỈNH DASHBOARD ================ */
+  .widget-toggle-row{ display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-radius:11px; background:var(--glass-strong); }
+  .widget-toggle-row .wt-label{ font-size:14.5px; font-weight:600; }
+
 </style>
 </head>
 <body data-mode="focus">
@@ -474,6 +571,10 @@
       <button class="nav-tab" data-tab="tabSalary" title="Tính Lương">💰<span class="nav-tab-label">Tính Lương</span></button>
       <button class="nav-tab" data-tab="tabMealPlans" title="Meal Plans">🍽️<span class="nav-tab-label">Meal Plans</span></button>
       <button class="nav-tab" data-tab="tabGratitude" title="Tri Ân">💝<span class="nav-tab-label">Tri Ân</span></button>
+      <button class="nav-tab" data-tab="tabNotes" title="Notes">📝<span class="nav-tab-label">Notes</span></button>
+      <button class="nav-tab" data-tab="tabRoutine" title="Daily Routine">🌅<span class="nav-tab-label">Daily Routine</span></button>
+      <button class="nav-tab" data-tab="tabLearning" title="Học Tập">📚<span class="nav-tab-label">Học Tập</span></button>
+      <button class="nav-tab" data-tab="tabMonthly" title="Monthly">🔁<span class="nav-tab-label">Monthly</span></button>
     </div>
     <div class="sidebar-footer">
       <div class="pill"><span class="dot"></span><span id="syncStatusPill">Đang lưu...</span></div>
@@ -497,6 +598,7 @@
         <button class="icon-btn" id="taskAddBtn">+</button>
       </div>
       <button class="btn btn-sm" id="pickFromKanbanBtn" style="width:100%; margin-bottom:10px;">📋 Chọn từ Kanban</button>
+      <button class="btn btn-sm" id="pickFromLearningBtn" style="width:100%; margin-bottom:10px;">🎯 Chọn mục tiêu học tập</button>
       <ul class="task-list" id="taskList"></ul>
     </div>
 
@@ -546,23 +648,34 @@
   </div>
 
   <div class="glass panel" style="margin-top:18px;">
-    <h2><span class="ic">📌</span> Hôm nay</h2>
+    <h2>
+      <span class="ic">📌</span> Hôm nay
+      <button class="btn btn-sm" id="todayCustomizeBtn">⚙️ Tùy chỉnh</button>
+    </h2>
     <div class="today-grid" id="todayOverviewGrid">
-      <div class="today-col">
+      <div class="today-col" data-widget="tasks">
         <div class="today-col-title">🗂️ Việc cần làm</div>
         <div id="todayTasks"></div>
       </div>
-      <div class="today-col">
+      <div class="today-col" data-widget="tamdao">
         <div class="today-col-title">🙏 Tâm Đạo</div>
         <div id="todayTamDao"></div>
       </div>
-      <div class="today-col">
+      <div class="today-col" data-widget="meals">
         <div class="today-col-title">🍽️ Bữa ăn đã lên kế hoạch</div>
         <div id="todayMeals"></div>
       </div>
-      <div class="today-col">
+      <div class="today-col" data-widget="gratitude">
         <div class="today-col-title">💝 Tri Ân sắp tới</div>
         <div id="todayGratitude"></div>
+      </div>
+      <div class="today-col" data-widget="routine">
+        <div class="today-col-title">🌅 Routine hôm nay</div>
+        <div id="todayRoutine"></div>
+      </div>
+      <div class="today-col" data-widget="monthly">
+        <div class="today-col-title">🔁 Nhắc định kỳ</div>
+        <div id="todayMonthly"></div>
       </div>
     </div>
   </div>
@@ -604,7 +717,10 @@
 
     <!-- KANBAN -->
     <div class="glass panel">
-      <h2><span class="t">🗂️ Bảng Kanban Công Việc</span></h2>
+      <h2>
+        <span class="t">🗂️ Bảng Kanban Công Việc</span>
+        <button class="btn btn-sm" id="taskArchiveBtn">📦 Kho lưu trữ</button>
+      </h2>
       <div class="add-row">
         <button class="btn btn-primary" style="flex:1" id="openAddTask">+ Thêm công việc</button>
       </div>
@@ -665,6 +781,17 @@
 </div>
 
 <!-- MODAL: ADD TASK -->
+<div class="modal-backdrop" id="taskArchiveBackdrop">
+  <div class="glass modal">
+    <h3>📦 Kho lưu trữ công việc</h3>
+    <input type="text" id="taskArchiveSearch" placeholder="🔍 Tìm trong kho lưu trữ..." style="width:100%; background:var(--glass-strong); border:1.5px solid var(--glass-border); border-radius:10px; padding:11px 13px; color:var(--text-hi); font-size:15px; margin-bottom:14px;">
+    <ul class="overdue-list" id="taskArchiveList" style="max-height:440px;"></ul>
+    <div class="modal-actions">
+      <button class="btn btn-sm" id="taskArchiveClose">Đóng</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal-backdrop" id="taskModalBackdrop">
   <div class="glass modal">
     <h3>Thêm công việc</h3>
@@ -1132,16 +1259,11 @@
 
     <!-- THƯ VIỆN MÓN ĂN -->
     <div class="glass panel">
-      <h2><span class="t">🍲 Thư viện món ăn</span></h2>
-      <div class="field" style="display:flex; gap:8px; flex-wrap:wrap;">
-        <input type="text" id="mpDishName" placeholder="Tên món ăn" style="flex:1; min-width:140px; background:var(--glass-strong); border:1.5px solid var(--glass-border); border-radius:10px; padding:11px 13px; color:var(--text-hi); font-size:15px;">
-        <input type="text" id="mpDishCat" list="mpCatSuggest" placeholder="Chuyên mục (VD: Chay)" style="flex:0 0 150px; background:var(--glass-strong); border:1.5px solid var(--glass-border); border-radius:10px; padding:11px 13px; color:var(--text-hi); font-size:15px;">
-        <datalist id="mpCatSuggest"><option value="Chay"><option value="Mặn"></datalist>
-        <input type="text" id="mpDishCal" placeholder="Calo" style="flex:0 0 100px; background:var(--glass-strong); border:1.5px solid var(--glass-border); border-radius:10px; padding:11px 13px; color:var(--text-hi); font-size:15px;">
-      </div>
-      <button class="btn btn-primary" style="width:100%; margin-top:10px;" id="mpAddDishBtn">+ Thêm món vào thư viện</button>
+      <h2><span class="t">📖 Kho công thức</span></h2>
+      <p style="font-size:13.5px; color:var(--text-lo); margin:-6px 0 12px;">Nhập sẵn công thức, sau này chọn món cho lịch ăn chỉ cần chọn tên.</p>
+      <button class="btn btn-primary" style="width:100%; margin-bottom:14px;" id="mpAddDishBtn">+ Thêm công thức mới</button>
 
-      <div class="filter-row" style="margin-top:16px;" id="mpCatFilterRow">
+      <div class="filter-row" id="mpCatFilterRow">
         <button class="filter-chip active" data-mpcat="all">Tất cả</button>
       </div>
       <ul class="overdue-list" id="mpDishList" style="max-height:420px;"></ul>
@@ -1194,7 +1316,258 @@
 </div>
 </section>
 
+<section id="tabNotes" class="tab-section">
+<div class="shell" style="max-width:1400px;">
+  <div class="notes-app">
+    <div class="notes-list-pane">
+      <div class="notes-list-header">
+        <div class="notes-search-wrap">
+          <input type="text" id="notesSearch" placeholder="🔍 Tìm kiếm">
+        </div>
+        <div class="notes-list-toolbar">
+          <button class="notes-icon-btn" id="ideaIconBtn" title="Ý tưởng chờ">💡</button>
+          <button class="notes-icon-btn" id="notesArchiveBtn" title="Kho lưu trữ">📦</button>
+          <button class="notes-icon-btn" id="notesAddBtn" title="Ghi chú mới">✏️</button>
+        </div>
+      </div>
+      <div class="filter-row" id="notesTagRow" style="padding:0 14px;">
+        <button class="filter-chip active" data-notetag="all">Tất cả</button>
+      </div>
+      <div class="notes-list" id="notesListEl"></div>
+    </div>
+    <div class="notes-detail-pane" id="notesDetailPane">
+      <div class="notes-confirm-box" id="notesConfirmBox">
+        <span>Xóa ghi chú này?</span>
+        <button class="nc-yes" id="notesConfirmYes">Xóa</button>
+        <button class="nc-no" id="notesConfirmNo">Hủy</button>
+      </div>
+      <div class="notes-detail-empty" id="notesDetailEmpty">
+        <div style="font-size:40px; margin-bottom:10px;">📝</div>
+        <div>Chọn 1 ghi chú để xem, hoặc bấm ✏️ để tạo mới</div>
+      </div>
+      <div class="notes-detail-content" id="notesDetailContent" style="display:none;">
+        <div class="notes-detail-toolbar">
+          <span class="notes-updated-label" id="noteUpdatedLabel"></span>
+          <div style="flex:1;"></div>
+          <button class="notes-icon-btn" id="notePinBtn" title="Ghim">📌</button>
+          <button class="notes-icon-btn" id="noteArchiveToggle" title="Lưu trữ">📦</button>
+          <button class="notes-icon-btn" id="noteDeleteBtn" title="Xóa">🗑️</button>
+        </div>
+        <input type="text" id="noteTitle" class="notes-title-input" placeholder="Tiêu đề">
+        <input type="text" id="noteTags" class="notes-tags-input" placeholder="Tag (cách nhau bằng dấu phẩy)">
+        <textarea id="noteContent" class="notes-content-input" placeholder="Ghi chú của bạn..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="modal-backdrop" id="ideaModalBackdrop">
+  <div class="glass modal">
+    <h3>💡 Ý tưởng chờ</h3>
+    <p style="font-size:13.5px; color:var(--text-lo); margin:-6px 0 14px;">Ném nhanh ý tưởng chưa rõ ràng vào đây, review định kỳ để quyết giữ hay bỏ.</p>
+    <div class="field" style="display:flex; gap:8px;">
+      <input type="text" id="ideaInput" placeholder="Ý tưởng mới..." style="flex:1; background:var(--glass-strong); border:1.5px solid var(--glass-border); border-radius:10px; padding:11px 13px; color:var(--text-hi); font-size:15px;">
+      <button class="btn btn-primary" id="ideaAddBtn" style="height:48px;">+ Thêm</button>
+    </div>
+    <div id="ideaPendingList" style="max-height:280px; overflow-y:auto;"></div>
+    <div id="ideaKeptWrap" style="margin-top:16px;">
+      <h3 style="font-size:12.5px; color:var(--text-lo); font-weight:700; text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px;">Đã giữ lại</h3>
+      <div id="ideaKeptList" style="max-height:160px; overflow-y:auto;"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-sm" id="ideaModalClose">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<section id="tabRoutine" class="tab-section">
+<div class="shell">
+  <div class="stats-grid" style="grid-template-columns:repeat(2,1fr); margin-bottom:18px;">
+    <div class="glass stat-card accent">
+      <div class="stat-label">🌅 Buổi sáng hôm nay</div>
+      <div class="stat-value" id="rtMorningPct">0%</div>
+      <div class="stat-sub" id="rtMorningSub">0/0 việc</div>
+    </div>
+    <div class="glass stat-card accent">
+      <div class="stat-label">🌙 Buổi tối hôm nay</div>
+      <div class="stat-value" id="rtEveningPct">0%</div>
+      <div class="stat-sub" id="rtEveningSub">0/0 việc</div>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="glass panel">
+      <h2><span class="t">🌅 Buổi sáng</span></h2>
+      <div class="field" style="display:flex; gap:8px;">
+        <input type="text" id="rtMorningInput" placeholder="Thêm việc vào routine sáng...">
+        <button class="icon-btn" id="rtMorningAddBtn">+</button>
+      </div>
+      <ul class="task-list" id="rtMorningList" style="max-height:none;"></ul>
+    </div>
+    <div class="glass panel">
+      <h2><span class="t">🌙 Buổi tối</span></h2>
+      <div class="field" style="display:flex; gap:8px;">
+        <input type="text" id="rtEveningInput" placeholder="Thêm việc vào routine tối...">
+        <button class="icon-btn" id="rtEveningAddBtn">+</button>
+      </div>
+      <ul class="task-list" id="rtEveningList" style="max-height:none;"></ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="tabLearning" class="tab-section">
+<div class="shell">
+  <div class="glass panel" style="margin-bottom:18px;">
+    <h2>
+      <span class="t">📚 Mục tiêu học tập &amp; kỹ năng</span>
+      <button class="btn btn-sm btn-primary" id="lgOpenAdd">+ Thêm mục tiêu</button>
+    </h2>
+    <div class="filter-row">
+      <button class="filter-chip active" data-lgtype="all">Tất cả</button>
+      <button class="filter-chip" data-lgtype="Khóa học">Khóa học</button>
+      <button class="filter-chip" data-lgtype="Chứng chỉ">Chứng chỉ</button>
+      <button class="filter-chip" data-lgtype="Kỹ năng">Kỹ năng</button>
+      <button class="filter-chip" data-lgtype="Sách">Sách</button>
+    </div>
+    <div id="lgList"></div>
+  </div>
+</div>
+</section>
+
+<section id="tabMonthly" class="tab-section">
+<div class="shell">
+  <div class="glass panel" style="margin-bottom:18px;">
+    <h2>
+      <span class="t">🔁 Việc định kỳ (không cố định ngày)</span>
+      <button class="btn btn-sm btn-primary" id="moOpenAdd">+ Thêm việc định kỳ</button>
+    </h2>
+    <p style="font-size:13.5px; color:var(--text-lo); margin:-6px 0 14px;">Nhắc kiểu "đã bao lâu chưa làm" thay vì gắn vào 1 ngày cố định trên lịch.</p>
+    <div id="moList"></div>
+  </div>
+</div>
+</section>
+
   </main>
+</div>
+
+<div class="modal-backdrop" id="notesArchiveBackdrop">
+  <div class="glass modal">
+    <h3>📦 Kho lưu trữ Notes</h3>
+    <input type="text" id="notesArchiveSearch" placeholder="🔍 Tìm trong kho lưu trữ..." style="width:100%; background:var(--glass-strong); border:1.5px solid var(--glass-border); border-radius:10px; padding:11px 13px; color:var(--text-hi); font-size:15px; margin-bottom:14px;">
+    <div id="notesArchiveGrid" style="max-height:440px; overflow-y:auto;"></div>
+    <div class="modal-actions">
+      <button class="btn btn-sm" id="notesArchiveClose">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="lgModalBackdrop">
+  <div class="glass modal">
+    <h3 id="lgModalTitle">Thêm mục tiêu học tập</h3>
+
+    <div class="field">
+      <label>Tên (khóa học/chứng chỉ/kỹ năng/sách)</label>
+      <input type="text" id="lgName" placeholder="VD: Chứng chỉ IELTS 7.0">
+    </div>
+    <div class="field" style="display:flex; gap:10px;">
+      <div style="flex:1;">
+        <label>Loại</label>
+        <select id="lgType">
+          <option value="Khóa học">Khóa học</option>
+          <option value="Chứng chỉ">Chứng chỉ</option>
+          <option value="Kỹ năng">Kỹ năng</option>
+          <option value="Sách">Sách</option>
+        </select>
+      </div>
+      <div style="flex:1;">
+        <label>Trạng thái</label>
+        <select id="lgStatus">
+          <option value="Chưa bắt đầu">Chưa bắt đầu</option>
+          <option value="Đang học">Đang học</option>
+          <option value="Tạm dừng">Tạm dừng</option>
+          <option value="Hoàn thành">Hoàn thành</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Hạn mục tiêu hoàn thành (không bắt buộc)</label>
+      <input type="date" id="lgDeadline">
+    </div>
+
+    <div class="field" id="lgCertFields" style="display:none;">
+      <div style="display:flex; gap:10px; margin-bottom:12px;">
+        <div style="flex:1;">
+          <label>Ngày thi</label>
+          <input type="date" id="lgExamDate">
+        </div>
+        <div style="flex:1;">
+          <label>Điểm mục tiêu</label>
+          <input type="text" id="lgTargetScore" placeholder="VD: 7.0">
+        </div>
+      </div>
+      <div style="display:flex; gap:10px;">
+        <div style="flex:1;">
+          <label>Điểm đạt được</label>
+          <input type="text" id="lgActualScore" placeholder="VD: chưa thi">
+        </div>
+        <div style="flex:1;">
+          <label>Chi phí đã đóng (đ)</label>
+          <input type="text" id="lgCost" placeholder="VD: 4500000">
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Mốc / chương (tick xong sẽ tự tính % tiến độ)</label>
+      <div id="lgMilestoneList" style="display:flex; flex-direction:column; gap:6px; margin-bottom:8px;"></div>
+      <div style="display:flex; gap:8px;">
+        <input type="text" id="lgMilestoneInput" placeholder="Tên mốc mới, VD: Chương 1">
+        <button class="btn btn-sm" id="lgMilestoneAddBtn">+ Thêm mốc</button>
+      </div>
+    </div>
+
+    <div class="field" id="lgStatsBox" style="display:none; background:var(--glass-strong); border-radius:12px; padding:12px 14px;">
+      <div style="font-size:13.5px; line-height:1.8;">
+        <div>🕐 Đã học: <b id="lgHoursStudied">0</b> giờ (<span id="lgSessionCount">0</span> phiên, tự lấy từ Digital Workspace)</div>
+        <div>🔥 Chuỗi ngày học liên tục: <b id="lgStreak">0</b> ngày</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Ghi chú</label>
+      <textarea id="lgNote" rows="3" style="width:100%; background:var(--glass-strong); border:1.5px solid var(--glass-border); border-radius:10px; padding:11px 13px; color:var(--text-hi); font-size:15px; resize:vertical;"></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-sm btn-danger" id="lgDelete" style="display:none; margin-right:auto;">Xóa</button>
+      <button class="btn btn-sm" id="lgCancel">Hủy</button>
+      <button class="btn btn-sm btn-primary" id="lgSave">Thêm mục tiêu</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="moModalBackdrop">
+  <div class="glass modal">
+    <h3 id="moModalTitle">Thêm việc định kỳ</h3>
+
+    <div class="field">
+      <label>Tên việc</label>
+      <input type="text" id="moName" placeholder="VD: Khám răng">
+    </div>
+    <div class="field">
+      <label>Chu kỳ nhắc (tháng)</label>
+      <input type="text" id="moInterval" placeholder="VD: 6">
+    </div>
+    <div class="field">
+      <label>Lần cuối làm (không bắt buộc, mặc định hôm nay)</label>
+      <input type="date" id="moLastDate">
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-sm btn-danger" id="moDelete" style="display:none; margin-right:auto;">Xóa</button>
+      <button class="btn btn-sm" id="moCancel">Hủy</button>
+      <button class="btn btn-sm btn-primary" id="moSave">Thêm</button>
+    </div>
+  </div>
 </div>
 
 <div class="modal-backdrop" id="grModalBackdrop">
@@ -1241,6 +1614,36 @@
       <button class="btn btn-sm btn-danger" id="grDelete" style="display:none; margin-right:auto;">Xóa</button>
       <button class="btn btn-sm" id="grCancel">Hủy</button>
       <button class="btn btn-sm btn-primary" id="grSave">Thêm người</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="mpRecipeBackdrop">
+  <div class="glass modal">
+    <h3 id="mpRecipeModalTitle">Thêm công thức mới</h3>
+    <div class="field">
+      <label>Tên món</label>
+      <input type="text" id="mpDishName" placeholder="VD: Đậu hũ sốt cà">
+    </div>
+    <div class="field" style="display:flex; gap:10px;">
+      <div style="flex:1;">
+        <label>Loại</label>
+        <input type="text" id="mpDishCat" list="mpCatSuggest" placeholder="VD: Chay">
+        <datalist id="mpCatSuggest"><option value="Chay"><option value="Mặn"></datalist>
+      </div>
+      <div style="flex:1;">
+        <label>Calo ước tính</label>
+        <input type="text" id="mpDishCal" placeholder="VD: 350">
+      </div>
+    </div>
+    <div class="field">
+      <label>Cách làm</label>
+      <textarea id="mpDishInstructions" rows="6" style="width:100%; background:var(--glass-strong); border:1.5px solid var(--glass-border); border-radius:10px; padding:11px 13px; color:var(--text-hi); font-size:15px; resize:vertical;" placeholder="Nguyên liệu, các bước thực hiện..."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-sm btn-danger" id="mpDishDelete" style="display:none; margin-right:auto;">Xóa</button>
+      <button class="btn btn-sm" id="mpDishCancel">Hủy</button>
+      <button class="btn btn-sm btn-primary" id="mpDishSave">Thêm công thức</button>
     </div>
   </div>
 </div>
@@ -1300,6 +1703,17 @@
   </div>
 </div>
 
+<div class="modal-backdrop" id="todayCustomizeBackdrop">
+  <div class="glass modal">
+    <h3>⚙️ Tùy chỉnh khối "Hôm nay"</h3>
+    <p style="font-size:13.5px; color:var(--text-lo); margin:-6px 0 14px;">Chọn widget nào bạn muốn hiện.</p>
+    <div id="todayWidgetToggles" style="display:flex; flex-direction:column; gap:10px;"></div>
+    <div class="modal-actions">
+      <button class="btn btn-sm btn-primary" id="todayCustomizeClose">Xong</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal-backdrop" id="kanbanPickBackdrop">
   <div class="glass modal">
     <h3>📋 Chọn công việc từ Kanban</h3>
@@ -1307,6 +1721,17 @@
     <ul class="overdue-list" id="kanbanPickList" style="max-height:400px;"></ul>
     <div class="modal-actions">
       <button class="btn btn-sm" id="kanbanPickCancel">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="learningPickBackdrop">
+  <div class="glass modal">
+    <h3>🎯 Chọn mục tiêu học tập</h3>
+    <p style="font-size:14px; color:var(--text-lo); margin:-6px 0 14px;">Chọn để gắn phiên tập trung này vào đúng mục tiêu — giờ học sẽ tự cộng dồn ở tab Học Tập.</p>
+    <ul class="overdue-list" id="learningPickList" style="max-height:400px;"></ul>
+    <div class="modal-actions">
+      <button class="btn btn-sm" id="learningPickCancel">Đóng</button>
     </div>
   </div>
 </div>
@@ -1512,6 +1937,39 @@ function attachDateShortcuts(inputId){
   });
   document.getElementById('kanbanPickCancel').addEventListener('click', ()=> kanbanPickModal.classList.remove('show'));
   kanbanPickModal.addEventListener('click', e=>{ if(e.target===kanbanPickModal) kanbanPickModal.classList.remove('show'); });
+
+  // ---------- Chọn mục tiêu học tập (gắn tên mục tiêu làm task đang tập trung, để giờ tự cộng dồn) ----------
+  const learningPickModal = document.getElementById('learningPickBackdrop');
+  document.getElementById('pickFromLearningBtn').addEventListener('click', ()=>{
+    const list = document.getElementById('learningPickList');
+    const goals = (window.__learning && window.__learning.exportData) ? window.__learning.exportData().goals.filter(g=>g.status!=='Hoàn thành') : [];
+    if(goals.length===0){
+      list.innerHTML = '<li class="empty-hint">Chưa có mục tiêu học tập nào — thêm ở tab Học Tập trước nhé.</li>';
+    } else {
+      list.innerHTML = goals.map(g=>`
+        <li class="overdue-item" style="cursor:pointer;" data-gid="${g.id}">
+          <span>📚</span><span class="od-text">${g.name}</span><span class="od-date">${g.type}</span>
+        </li>`).join('');
+      list.querySelectorAll('li[data-gid]').forEach((li,i)=>{
+        li.addEventListener('click', ()=>{
+          const g = goals[i];
+          const existing = tasks.find(x=>x.fromLearningId===g.id);
+          if(existing){ activeTaskId = existing.id; }
+          else{
+            const newTask = { id:'wl'+Date.now(), text:g.name, done:false, fromLearningId:g.id };
+            tasks.push(newTask);
+            activeTaskId = newTask.id;
+          }
+          updateRingTask(); renderTasks();
+          learningPickModal.classList.remove('show');
+          toast('Đã gắn "' + g.name + '" — giờ học sẽ tự cộng dồn.', '🎯');
+        });
+      });
+    }
+    learningPickModal.classList.add('show');
+  });
+  document.getElementById('learningPickCancel').addEventListener('click', ()=> learningPickModal.classList.remove('show'));
+  learningPickModal.addEventListener('click', e=>{ if(e.target===learningPickModal) learningPickModal.classList.remove('show'); });
   taskInput.addEventListener('keydown', e=>{ if(e.key==='Enter'){ addTask(taskInput.value); taskInput.value=''; } });
 
   function escapeHtml(s){ return s.replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
@@ -1793,6 +2251,7 @@ function attachDateShortcuts(inputId){
   let tasks = [];   // {id, text, urgency, deadline, time, repeat:{freq,weekday}, done}
   let events = [];  // {id, title, date, time, repeat:{freq,weekday}}
   let taskSeq = 1, eventSeq = 1;
+  let archivedTasks = [];
 
   // ================= KANBAN =================
   let activeFilter = 'all';
@@ -1840,7 +2299,15 @@ function attachDateShortcuts(inputId){
       <div class="ttask-controls">
         <button class="ttask-move-btn" data-dir="-1" ${idx===0?'disabled':''} title="Chuyển lùi">‹</button>
         <button class="ttask-move-btn" data-dir="1" ${idx===STATUS_COLS.length-1?'disabled':''} title="Chuyển tiếp">›</button>
+        <button class="ttask-move-btn" id="archiveBtn-${t.id}" title="Lưu trữ">📦</button>
       </div>`;
+    li.querySelector(`#archiveBtn-${t.id}`).addEventListener('click', (e)=>{
+      e.stopPropagation();
+      tasks = tasks.filter(x=>x.id!==t.id);
+      archivedTasks.push({ ...t, archivedAt:new Date().toISOString() });
+      renderKanban(); renderCalendar();
+      toast('Đã lưu trữ "' + t.text + '".', '📦');
+    });
     li.querySelector('.ttask-del').addEventListener('click', ()=>{ tasks = tasks.filter(x=>x.id!==t.id); renderKanban(); renderCalendar(); });
     li.querySelectorAll('.ttask-move-btn').forEach(btn=>{
       btn.addEventListener('click', ()=>{
@@ -2011,7 +2478,7 @@ function attachDateShortcuts(inputId){
     attachDropTargets(document.querySelectorAll('.day-cell'), (el)=> el.dataset.date, null);
   }
 
-  const ROW_H = 40; // phải khớp .hour-cell{ height:40px }
+  const ROW_H = 54; // phải khớp .hour-cell{ height:54px }
   const HOUR_START = 6, HOUR_END = 22;
   function timeToDec(t){ if(!t) return null; const [h,m] = t.split(':').map(Number); return h + (m||0)/60; }
 
@@ -2200,12 +2667,41 @@ function attachDateShortcuts(inputId){
   renderKanban();
   renderCalendar();
 
+  // ---------- Kho lưu trữ công việc ----------
+  const taskArchiveModal = document.getElementById('taskArchiveBackdrop');
+  document.getElementById('taskArchiveBtn').addEventListener('click', ()=>{ renderTaskArchiveList(); taskArchiveModal.classList.add('show'); });
+  document.getElementById('taskArchiveClose').addEventListener('click', ()=> taskArchiveModal.classList.remove('show'));
+  taskArchiveModal.addEventListener('click', e=>{ if(e.target===taskArchiveModal) taskArchiveModal.classList.remove('show'); });
+  document.getElementById('taskArchiveSearch').addEventListener('input', renderTaskArchiveList);
+  function renderTaskArchiveList(){
+    const list = document.getElementById('taskArchiveList');
+    const q = document.getElementById('taskArchiveSearch').value.trim().toLowerCase();
+    const filtered = archivedTasks.filter(t=> !q || t.text.toLowerCase().includes(q));
+    if(filtered.length===0){ list.innerHTML = '<li class="empty-hint">Kho lưu trữ trống.</li>'; return; }
+    const sorted = [...filtered].sort((a,b)=> (b.archivedAt||'').localeCompare(a.archivedAt||''));
+    list.innerHTML = '';
+    sorted.forEach(t=>{
+      const li = document.createElement('li');
+      li.className = 'overdue-item';
+      li.innerHTML = `<span class="u-dot ${t.urgency}"></span><span class="od-text">${escapeHtml(t.text)}</span><button class="btn btn-sm">↩ Khôi phục</button>`;
+      li.querySelector('button').addEventListener('click', ()=>{
+        archivedTasks = archivedTasks.filter(x=>x.id!==t.id);
+        const { archivedAt, ...restored } = t;
+        tasks.push(restored);
+        renderTaskArchiveList(); renderKanban();
+        toast('Đã khôi phục "' + t.text + '".', '↩');
+      });
+      list.appendChild(li);
+    });
+  }
+
   window.__planner = {
     get tasks(){ return tasks; }, get events(){ return events; },
-    exportData(){ return { tasks, events }; },
+    exportData(){ return { tasks, events, archivedTasks }; },
     importData(d){
       tasks = Array.isArray(d.tasks) ? d.tasks : [];
       events = Array.isArray(d.events) ? d.events : [];
+      archivedTasks = Array.isArray(d.archivedTasks) ? d.archivedTasks : [];
       const maxT = tasks.reduce((m,t)=>{ const n=parseInt(String(t.id).replace('t',''),10); return isNaN(n)?m:Math.max(m,n); }, 0);
       const maxE = events.reduce((m,e)=>{ const n=parseInt(String(e.id).replace('e',''),10); return isNaN(n)?m:Math.max(m,n); }, 0);
       taskSeq = maxT+1; eventSeq = maxE+1;
@@ -2229,6 +2725,10 @@ document.querySelectorAll('.nav-tab').forEach(btn=>{
     if(btn.dataset.tab === 'tabWorkspace' && window.renderTodayOverview) window.renderTodayOverview();
     if(btn.dataset.tab === 'tabMealPlans' && window.renderMealPlans) window.renderMealPlans();
     if(btn.dataset.tab === 'tabGratitude' && window.renderGratitude) window.renderGratitude();
+    if(btn.dataset.tab === 'tabNotes' && window.renderNotes) window.renderNotes();
+    if(btn.dataset.tab === 'tabRoutine' && window.renderRoutine) window.renderRoutine();
+    if(btn.dataset.tab === 'tabLearning' && window.renderLearning) window.renderLearning();
+    if(btn.dataset.tab === 'tabMonthly' && window.renderMonthly) window.renderMonthly();
   });
 });
 
@@ -2264,6 +2764,10 @@ document.querySelectorAll('.nav-tab').forEach(btn=>{
       salary: window.__salary ? window.__salary.exportData() : null,
       mealplans: window.__mealplans ? window.__mealplans.exportData() : null,
       gratitude: window.__gratitude ? window.__gratitude.exportData() : null,
+      notes: window.__notes ? window.__notes.exportData() : null,
+      routine: window.__routine ? window.__routine.exportData() : null,
+      learning: window.__learning ? window.__learning.exportData() : null,
+      monthly: window.__monthly ? window.__monthly.exportData() : null,
     };
   }
 
@@ -2289,6 +2793,10 @@ document.querySelectorAll('.nav-tab').forEach(btn=>{
     if(data.salary && window.__salary) window.__salary.importData(data.salary);
     if(data.mealplans && window.__mealplans) window.__mealplans.importData(data.mealplans);
     if(data.gratitude && window.__gratitude) window.__gratitude.importData(data.gratitude);
+    if(data.notes && window.__notes) window.__notes.importData(data.notes);
+    if(data.routine && window.__routine) window.__routine.importData(data.routine);
+    if(data.learning && window.__learning) window.__learning.importData(data.learning);
+    if(data.monthly && window.__monthly) window.__monthly.importData(data.monthly);
   }
 
   document.getElementById('doImportBtn').addEventListener('click', ()=>{
@@ -3393,13 +3901,14 @@ Hãy giúp tôi:
     { key:'toi', label:'🌙 Tối' }, { key:'douong', label:'🥤 Đồ uống' }
   ];
 
-  let library = [];  // {id, name, category, cal}
+  let library = [];  // {id, name, category, cal, instructions}
   let mealPlan = {}; // { 'YYYY-MM-DD': { sang:{dishId,name,cal}, ... } }
   let dishSeq = 1;
   let libFilter = 'all';
   let refWeek = new Date();
   let pickerCtx = null; // {date, slotKey}
   let pickerFilter = 'all';
+  let editingDishId = null;
 
   function toastM(text, icon){
     const host = document.getElementById('toastHost');
@@ -3413,18 +3922,57 @@ Hãy giúp tôi:
     return [...new Set(library.map(d=>d.category).filter(Boolean))].sort();
   }
 
-  // ---------- Thư viện món ăn ----------
+  // ---------- Kho công thức: modal thêm/sửa ----------
+  const recipeModal = document.getElementById('mpRecipeBackdrop');
   document.getElementById('mpAddDishBtn').addEventListener('click', ()=>{
-    const name = document.getElementById('mpDishName').value.trim();
-    const category = document.getElementById('mpDishCat').value.trim() || 'Khác';
-    const cal = num(document.getElementById('mpDishCal').value);
-    if(!name){ toastM('Nhập tên món ăn nhé.', '⚠'); return; }
-    library.push({ id:'dish'+(dishSeq++), name, category, cal });
+    editingDishId = null;
+    document.getElementById('mpRecipeModalTitle').textContent = 'Thêm công thức mới';
+    document.getElementById('mpDishSave').textContent = 'Thêm công thức';
+    document.getElementById('mpDishDelete').style.display = 'none';
     document.getElementById('mpDishName').value = '';
     document.getElementById('mpDishCat').value = '';
     document.getElementById('mpDishCal').value = '';
+    document.getElementById('mpDishInstructions').value = '';
+    recipeModal.classList.add('show');
+  });
+  function openDishEdit(id){
+    const d = library.find(x=>x.id===id);
+    if(!d) return;
+    editingDishId = id;
+    document.getElementById('mpRecipeModalTitle').textContent = 'Sửa công thức';
+    document.getElementById('mpDishSave').textContent = 'Lưu thay đổi';
+    document.getElementById('mpDishDelete').style.display = 'inline-block';
+    document.getElementById('mpDishName').value = d.name;
+    document.getElementById('mpDishCat').value = d.category;
+    document.getElementById('mpDishCal').value = d.cal;
+    document.getElementById('mpDishInstructions').value = d.instructions || '';
+    recipeModal.classList.add('show');
+  }
+  document.getElementById('mpDishCancel').addEventListener('click', ()=> recipeModal.classList.remove('show'));
+  recipeModal.addEventListener('click', e=>{ if(e.target===recipeModal) recipeModal.classList.remove('show'); });
+  document.getElementById('mpDishDelete').addEventListener('click', ()=>{
+    if(!editingDishId) return;
+    library = library.filter(x=>x.id!==editingDishId);
+    recipeModal.classList.remove('show');
     renderLibrary();
-    toastM('Đã thêm món vào thư viện.', '🍲');
+    toastM('Đã xóa công thức.', '🗑️');
+  });
+  document.getElementById('mpDishSave').addEventListener('click', ()=>{
+    const name = document.getElementById('mpDishName').value.trim();
+    const category = document.getElementById('mpDishCat').value.trim() || 'Khác';
+    const cal = num(document.getElementById('mpDishCal').value);
+    const instructions = document.getElementById('mpDishInstructions').value.trim();
+    if(!name){ toastM('Nhập tên món ăn nhé.', '⚠'); return; }
+    if(editingDishId){
+      const d = library.find(x=>x.id===editingDishId);
+      if(d){ d.name=name; d.category=category; d.cal=cal; d.instructions=instructions; }
+      toastM('Đã lưu thay đổi công thức.', '📖');
+    } else {
+      library.push({ id:'dish'+(dishSeq++), name, category, cal, instructions });
+      toastM('Đã thêm công thức mới.', '📖');
+    }
+    recipeModal.classList.remove('show');
+    renderLibrary();
   });
 
   function renderCatFilterRow(){
@@ -3443,16 +3991,14 @@ Hãy giúp tôi:
     suggest.innerHTML = (cats.length ? cats : ['Chay','Mặn']).map(c=>`<option value="${escapeHtml(c)}">`).join('');
     const list = document.getElementById('mpDishList');
     const filtered = libFilter==='all' ? library : library.filter(d=>d.category===libFilter);
-    if(filtered.length===0){ list.innerHTML = '<li class="empty-hint">Chưa có món nào — thêm món ở trên nhé.</li>'; return; }
+    if(filtered.length===0){ list.innerHTML = '<li class="empty-hint">Chưa có công thức nào — bấm "+ Thêm công thức mới" nhé.</li>'; return; }
     list.innerHTML = '';
     filtered.forEach(d=>{
       const li = document.createElement('li');
       li.className = 'mp-dish-item';
-      li.innerHTML = `<span class="mp-cat-badge">${escapeHtml(d.category)}</span><span class="mp-dish-name">${escapeHtml(d.name)}</span><span class="mp-dish-cal">${d.cal} kcal</span><button class="mp-dish-del">✕</button>`;
-      li.querySelector('.mp-dish-del').addEventListener('click', ()=>{
-        library = library.filter(x=>x.id!==d.id);
-        renderLibrary();
-      });
+      li.style.cursor = 'pointer';
+      li.innerHTML = `<span class="mp-cat-badge">${escapeHtml(d.category)}</span><span class="mp-dish-name">${escapeHtml(d.name)}</span><span class="mp-dish-cal">${d.cal} kcal</span>${d.instructions?'<span title="Có công thức">📖</span>':''}`;
+      li.addEventListener('click', ()=> openDishEdit(d.id));
       list.appendChild(li);
     });
   }
@@ -3588,8 +4134,48 @@ Hãy giúp tôi:
   function todayIso(){ return new Date().toISOString().slice(0,10); }
   function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
+  const WIDGET_KEYS = ['tasks','tamdao','meals','gratitude','routine','monthly'];
+  const WIDGET_LABEL = { tasks:'🗂️ Việc cần làm', tamdao:'🙏 Tâm Đạo', meals:'🍽️ Bữa ăn đã lên kế hoạch', gratitude:'💝 Tri Ân sắp tới', routine:'🌅 Routine hôm nay', monthly:'🔁 Nhắc định kỳ' };
+  const DASH_KEY = 'flow_dashboard_widgets';
+  function loadEnabledWidgets(){
+    try{ const raw = localStorage.getItem(DASH_KEY); if(raw) return JSON.parse(raw); }catch(e){}
+    return [...WIDGET_KEYS]; // mặc định hiện tất cả
+  }
+  function saveEnabledWidgets(list){ try{ localStorage.setItem(DASH_KEY, JSON.stringify(list)); }catch(e){} }
+  let enabledWidgets = loadEnabledWidgets();
+
+  function applyWidgetVisibility(){
+    document.querySelectorAll('.today-col').forEach(col=>{
+      col.style.display = enabledWidgets.includes(col.dataset.widget) ? '' : 'none';
+    });
+  }
+
+  const customModal = document.getElementById('todayCustomizeBackdrop');
+  document.getElementById('todayCustomizeBtn').addEventListener('click', ()=>{
+    const wrap = document.getElementById('todayWidgetToggles');
+    wrap.innerHTML = WIDGET_KEYS.map(k=>`
+      <div class="widget-toggle-row">
+        <span class="wt-label">${WIDGET_LABEL[k]}</span>
+        <div class="switch ${enabledWidgets.includes(k)?'on':''}" data-wkey="${k}"><div class="knob"></div></div>
+      </div>`).join('');
+    wrap.querySelectorAll('.switch').forEach(sw=>{
+      sw.addEventListener('click', function(){
+        const k = this.dataset.wkey;
+        this.classList.toggle('on');
+        if(this.classList.contains('on')){ if(!enabledWidgets.includes(k)) enabledWidgets.push(k); }
+        else{ enabledWidgets = enabledWidgets.filter(x=>x!==k); }
+        saveEnabledWidgets(enabledWidgets);
+        applyWidgetVisibility();
+      });
+    });
+    customModal.classList.add('show');
+  });
+  document.getElementById('todayCustomizeClose').addEventListener('click', ()=> customModal.classList.remove('show'));
+  customModal.addEventListener('click', e=>{ if(e.target===customModal) customModal.classList.remove('show'); });
+
   function renderTodayOverview(){
     const today = todayIso();
+    applyWidgetVisibility();
 
     // Việc cần làm hôm nay: task Kanban ở Cần làm/Đang làm, ưu tiên có deadline hôm nay, tối đa 5 dòng
     const taskEl = document.getElementById('todayTasks');
@@ -3632,6 +4218,28 @@ Hãy giúp tôi:
     grEl.innerHTML = soonPeople.length
       ? soonPeople.map(x=>`<div class="today-item">${x.days===0?'🎉 Hôm nay: ':`còn ${x.days} ngày: `}${escapeHtml(x.p.name)}</div>`).join('')
       : '<div class="today-empty">Không có ai trong 7 ngày tới.</div>';
+
+    // Routine hôm nay
+    const rtEl = document.getElementById('todayRoutine');
+    const rtData = (window.__routine && window.__routine.exportData) ? window.__routine.exportData() : { items:[], completions:{} };
+    const todayDone = rtData.completions[today] || {};
+    if(rtData.items.length===0){
+      rtEl.innerHTML = '<div class="today-empty">Chưa thiết lập routine nào.</div>';
+    } else {
+      const doneCount = rtData.items.filter(it=>todayDone[it.id]).length;
+      rtEl.innerHTML = `<div class="today-item">Đã hoàn thành ${doneCount}/${rtData.items.length} việc trong routine</div>`;
+    }
+
+    // Nhắc định kỳ quá hạn
+    const moEl = document.getElementById('todayMonthly');
+    const moData = (window.__monthly && window.__monthly.exportData) ? window.__monthly.exportData().items : [];
+    const overdue = moData.filter(it=>{
+      const days = Math.floor((new Date(today) - new Date(it.lastDate)) / 86400000);
+      return (days/30) >= it.intervalMonths;
+    });
+    moEl.innerHTML = overdue.length
+      ? overdue.map(it=>`<div class="today-item">⚠ ${escapeHtml(it.name)}</div>`).join('')
+      : '<div class="today-empty">Không có việc nào quá hạn.</div>';
   }
 
   window.renderTodayOverview = renderTodayOverview;
@@ -3797,6 +4405,651 @@ Hãy giúp tôi:
     }
   };
   renderAllGR();
+})();
+
+// ================= NOTES + Ý TƯỞNG CHỜ =================
+(function(){
+  function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function nowIso(){ return new Date().toISOString(); }
+  function formatShort(iso){
+    const d = new Date(iso);
+    const today = new Date();
+    if(d.toDateString()===today.toDateString()) return d.toLocaleTimeString('vi-VN', {hour:'2-digit', minute:'2-digit'});
+    return d.toLocaleDateString('vi-VN');
+  }
+
+  let notes = []; // {id, title, content, tags:[], pinned, archived, createdAt, updatedAt}
+  let ideas = []; // {id, text, status:'pending'|'kept'|'discarded', createdAt}
+  let noteSeq = 1, ideaSeq = 1;
+  let selectedNoteId = null;
+  let noteTagFilter = 'all';
+  let noteSearchQ = '';
+  let saveDebounce = null;
+
+  function toastN(text, icon){
+    const host = document.getElementById('toastHost');
+    const el = document.createElement('div');
+    el.className = 'glass toast';
+    el.innerHTML = `<span class="t-ic">${icon||'📝'}</span><span>${text}</span>`;
+    host.appendChild(el);
+    setTimeout(()=>{ el.style.opacity='0'; el.style.transition='opacity .4s ease'; setTimeout(()=>el.remove(),400); }, 3400);
+  }
+  function distinctTags(){ return [...new Set(notes.filter(n=>!n.archived).flatMap(n=>n.tags))].sort(); }
+  function matchesSearch(n, q){
+    if(!q) return true;
+    q = q.toLowerCase();
+    return n.title.toLowerCase().includes(q) || n.content.toLowerCase().includes(q) || n.tags.some(t=>t.toLowerCase().includes(q));
+  }
+  function visibleNotes(){
+    let list = notes.filter(n=>!n.archived);
+    if(noteTagFilter!=='all') list = list.filter(n=>n.tags.includes(noteTagFilter));
+    list = list.filter(n=>matchesSearch(n, noteSearchQ));
+    list.sort((a,b)=> (b.pinned-a.pinned) || b.updatedAt.localeCompare(a.updatedAt));
+    return list;
+  }
+
+  // ---------- Danh sách bên trái ----------
+  function renderTagRow(){
+    const row = document.getElementById('notesTagRow');
+    const tags = distinctTags();
+    row.innerHTML = `<button class="filter-chip ${noteTagFilter==='all'?'active':''}" data-notetag="all">Tất cả</button>` +
+      tags.map(t=>`<button class="filter-chip ${noteTagFilter===t?'active':''}" data-notetag="${escapeHtml(t)}">${escapeHtml(t)}</button>`).join('');
+    row.querySelectorAll('.filter-chip').forEach(chip=>{
+      chip.addEventListener('click', ()=>{ noteTagFilter = chip.dataset.notetag; renderNotesList(); });
+    });
+  }
+  function renderNotesList(){
+    renderTagRow();
+    const wrap = document.getElementById('notesListEl');
+    const list = visibleNotes();
+    wrap.innerHTML = '';
+    if(list.length===0){ wrap.innerHTML = '<div class="note-row-empty">Chưa có ghi chú nào khớp.</div>'; return; }
+    list.forEach(n=>{
+      const row = document.createElement('div');
+      row.className = 'note-row' + (n.id===selectedNoteId?' selected':'');
+      const snippet = (n.content||'').replace(/\n/g,' ').slice(0,80);
+      row.innerHTML = `
+        <div class="note-row-title">${n.pinned?'📌 ':''}${escapeHtml(n.title||'Ghi chú mới')}</div>
+        <div class="note-row-meta"><span>${formatShort(n.updatedAt)}</span><span class="note-row-snippet">${escapeHtml(snippet)}</span></div>`;
+      row.addEventListener('click', ()=> selectNote(n.id));
+      wrap.appendChild(row);
+    });
+  }
+  document.getElementById('notesSearch').addEventListener('input', function(){ noteSearchQ = this.value.trim(); renderNotesList(); });
+
+  // ---------- Pane chi tiết bên phải (sửa trực tiếp, tự lưu) ----------
+  function selectNote(id){
+    document.getElementById('notesConfirmBox').classList.remove('show');
+    selectedNoteId = id;
+    const n = notes.find(x=>x.id===id);
+    document.getElementById('notesDetailEmpty').style.display = n ? 'none' : 'flex';
+    document.getElementById('notesDetailContent').style.display = n ? 'flex' : 'none';
+    renderNotesList();
+    if(!n) return;
+    document.getElementById('noteUpdatedLabel').textContent = 'Sửa lúc ' + formatShort(n.updatedAt);
+    document.getElementById('noteTitle').value = n.title;
+    document.getElementById('noteTags').value = n.tags.join(', ');
+    document.getElementById('noteContent').value = n.content;
+    document.getElementById('notePinBtn').classList.toggle('on', n.pinned);
+    document.getElementById('noteArchiveToggle').title = n.archived ? 'Khôi phục' : 'Lưu trữ';
+  }
+  function autosaveCurrent(){
+    const n = notes.find(x=>x.id===selectedNoteId);
+    if(!n) return;
+    n.title = document.getElementById('noteTitle').value;
+    n.content = document.getElementById('noteContent').value;
+    n.tags = document.getElementById('noteTags').value.split(',').map(t=>t.trim()).filter(Boolean);
+    n.updatedAt = nowIso();
+    document.getElementById('noteUpdatedLabel').textContent = 'Sửa lúc ' + formatShort(n.updatedAt);
+    renderNotesList();
+  }
+  function onDetailInput(){
+    clearTimeout(saveDebounce);
+    saveDebounce = setTimeout(autosaveCurrent, 500);
+  }
+  ['noteTitle','noteTags','noteContent'].forEach(id=>{
+    document.getElementById(id).addEventListener('input', onDetailInput);
+  });
+
+  document.getElementById('notesAddBtn').addEventListener('click', ()=>{
+    const n = { id:'note'+(noteSeq++), title:'', content:'', tags:[], pinned:false, archived:false, createdAt:nowIso(), updatedAt:nowIso() };
+    notes.unshift(n);
+    noteTagFilter = 'all'; noteSearchQ=''; document.getElementById('notesSearch').value='';
+    renderNotesList();
+    selectNote(n.id);
+    document.getElementById('noteTitle').focus();
+  });
+  document.getElementById('notePinBtn').addEventListener('click', ()=>{
+    const n = notes.find(x=>x.id===selectedNoteId);
+    if(!n) return;
+    n.pinned = !n.pinned;
+    document.getElementById('notePinBtn').classList.toggle('on', n.pinned);
+    renderNotesList();
+  });
+  document.getElementById('noteArchiveToggle').addEventListener('click', ()=>{
+    const n = notes.find(x=>x.id===selectedNoteId);
+    if(!n) return;
+    n.archived = !n.archived;
+    toastN(n.archived ? 'Đã lưu trữ ghi chú.' : 'Đã khôi phục ghi chú.', '📦');
+    selectedNoteId = null;
+    document.getElementById('notesDetailEmpty').style.display = 'flex';
+    document.getElementById('notesDetailContent').style.display = 'none';
+    renderNotesList();
+  });
+  document.getElementById('noteDeleteBtn').addEventListener('click', ()=>{
+    if(!selectedNoteId) return;
+    document.getElementById('notesConfirmBox').classList.add('show');
+  });
+  document.getElementById('notesConfirmNo').addEventListener('click', ()=>{
+    document.getElementById('notesConfirmBox').classList.remove('show');
+  });
+  document.getElementById('notesConfirmYes').addEventListener('click', ()=>{
+    document.getElementById('notesConfirmBox').classList.remove('show');
+    const n = notes.find(x=>x.id===selectedNoteId);
+    if(!n) return;
+    notes = notes.filter(x=>x.id!==selectedNoteId);
+    selectedNoteId = null;
+    document.getElementById('notesDetailEmpty').style.display = 'flex';
+    document.getElementById('notesDetailContent').style.display = 'none';
+    renderNotesList();
+    toastN('Đã xóa ghi chú.', '🗑️');
+  });
+
+  // ---------- Kho lưu trữ Notes ----------
+  const archiveModal = document.getElementById('notesArchiveBackdrop');
+  document.getElementById('notesArchiveBtn').addEventListener('click', ()=>{ renderArchiveGrid(); archiveModal.classList.add('show'); });
+  document.getElementById('notesArchiveClose').addEventListener('click', ()=> archiveModal.classList.remove('show'));
+  archiveModal.addEventListener('click', e=>{ if(e.target===archiveModal) archiveModal.classList.remove('show'); });
+  document.getElementById('notesArchiveSearch').addEventListener('input', renderArchiveGrid);
+  function renderArchiveGrid(){
+    const grid = document.getElementById('notesArchiveGrid');
+    const q = document.getElementById('notesArchiveSearch').value.trim();
+    const list = notes.filter(n=>n.archived).filter(n=>matchesSearch(n,q));
+    grid.innerHTML = '';
+    if(list.length===0){ grid.innerHTML = '<div class="empty-hint">Kho lưu trữ trống.</div>'; return; }
+    list.forEach(n=>{
+      const row = document.createElement('div');
+      row.className = 'note-row';
+      row.style.cursor = 'pointer';
+      row.innerHTML = `<div class="note-row-title">${escapeHtml(n.title||'Ghi chú mới')}</div><div class="note-row-meta"><span>${formatShort(n.updatedAt)}</span></div>`;
+      row.addEventListener('click', ()=>{
+        n.archived = false;
+        renderArchiveGrid();
+        renderNotesList();
+        archiveModal.classList.remove('show');
+        selectNote(n.id);
+        toastN('Đã khôi phục ghi chú.', '↩');
+      });
+      grid.appendChild(row);
+    });
+  }
+
+  // ---------- Ý tưởng chờ (chỉ 1 icon, bấm ra cửa sổ) ----------
+  const ideaModal = document.getElementById('ideaModalBackdrop');
+  document.getElementById('ideaIconBtn').addEventListener('click', ()=>{ renderIdeas(); ideaModal.classList.add('show'); });
+  document.getElementById('ideaModalClose').addEventListener('click', ()=> ideaModal.classList.remove('show'));
+  ideaModal.addEventListener('click', e=>{ if(e.target===ideaModal) ideaModal.classList.remove('show'); });
+
+  function renderIdeas(){
+    const pendingEl = document.getElementById('ideaPendingList');
+    const pending = ideas.filter(i=>i.status==='pending').sort((a,b)=>b.createdAt.localeCompare(a.createdAt));
+    pendingEl.innerHTML = pending.length ? '' : '<div class="empty-hint">Chưa có ý tưởng nào đang chờ.</div>';
+    pending.forEach(i=>{
+      const div = document.createElement('div');
+      div.className = 'idea-item';
+      div.innerHTML = `<span class="idea-text">${escapeHtml(i.text)}</span>
+        <button class="idea-btn keep" title="Giữ lại">✅</button>
+        <button class="idea-btn discard" title="Bỏ">🗑️</button>`;
+      div.querySelector('.keep').addEventListener('click', ()=>{ i.status='kept'; renderIdeas(); });
+      div.querySelector('.discard').addEventListener('click', ()=>{ ideas = ideas.filter(x=>x.id!==i.id); renderIdeas(); });
+      pendingEl.appendChild(div);
+    });
+
+    const keptEl = document.getElementById('ideaKeptList');
+    const kept = ideas.filter(i=>i.status==='kept');
+    document.getElementById('ideaKeptWrap').style.display = kept.length ? 'block' : 'none';
+    keptEl.innerHTML = '';
+    kept.forEach(i=>{
+      const div = document.createElement('div');
+      div.className = 'idea-item kept';
+      div.innerHTML = `<span class="idea-text">${escapeHtml(i.text)}</span><button class="idea-btn discard" title="Xóa">✕</button>`;
+      div.querySelector('.discard').addEventListener('click', ()=>{ ideas = ideas.filter(x=>x.id!==i.id); renderIdeas(); });
+      keptEl.appendChild(div);
+    });
+    updateIdeaIconBadge();
+  }
+  function updateIdeaIconBadge(){
+    const pendingCount = ideas.filter(i=>i.status==='pending').length;
+    document.getElementById('ideaIconBtn').classList.toggle('on', pendingCount>0);
+  }
+  document.getElementById('ideaAddBtn').addEventListener('click', ()=>{
+    const input = document.getElementById('ideaInput');
+    const text = input.value.trim();
+    if(!text) return;
+    ideas.push({ id:'idea'+(ideaSeq++), text, status:'pending', createdAt:nowIso() });
+    input.value = '';
+    renderIdeas();
+  });
+  document.getElementById('ideaInput').addEventListener('keydown', e=>{ if(e.key==='Enter') document.getElementById('ideaAddBtn').click(); });
+
+  function renderAllNotes(){
+    renderNotesList();
+    updateIdeaIconBadge();
+    document.getElementById('notesDetailEmpty').style.display = selectedNoteId ? 'none' : 'flex';
+    document.getElementById('notesDetailContent').style.display = selectedNoteId ? 'flex' : 'none';
+    if(selectedNoteId) selectNote(selectedNoteId);
+  }
+
+  window.renderNotes = renderAllNotes;
+  window.__notes = {
+    exportData(){ return { notes, ideas }; },
+    importData(d){
+      notes = Array.isArray(d.notes) ? d.notes : [];
+      ideas = Array.isArray(d.ideas) ? d.ideas : [];
+      const maxN = notes.reduce((m,n)=>{ const nn=parseInt(String(n.id).replace('note',''),10); return isNaN(nn)?m:Math.max(m,nn); }, 0);
+      const maxI = ideas.reduce((m,i)=>{ const nn=parseInt(String(i.id).replace('idea',''),10); return isNaN(nn)?m:Math.max(m,nn); }, 0);
+      noteSeq = maxN+1; ideaSeq = maxI+1;
+      selectedNoteId = null;
+      renderAllNotes();
+    }
+  };
+  renderAllNotes();
+})();
+
+// ================= DAILY ROUTINE =================
+(function(){
+  function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function todayIso(){ return new Date().toISOString().slice(0,10); }
+
+  let items = []; // {id, period:'morning'|'evening', text}
+  let completions = {}; // { 'YYYY-MM-DD': { itemId: true } }
+  let rtSeq = 1;
+
+  function isDone(id){ const t = completions[todayIso()]; return !!(t && t[id]); }
+  function toggleDone(id){
+    const today = todayIso();
+    completions[today] = completions[today] || {};
+    completions[today][id] = !completions[today][id];
+    renderRoutine();
+  }
+
+  function renderList(period, listElId, pctElId, subElId){
+    const list = document.getElementById(listElId);
+    const periodItems = items.filter(x=>x.period===period);
+    list.innerHTML = '';
+    if(periodItems.length===0){ list.innerHTML = '<li class="empty-hint">Chưa có việc nào — thêm ở trên nhé.</li>'; }
+    let doneCount = 0;
+    periodItems.forEach(it=>{
+      const done = isDone(it.id);
+      if(done) doneCount++;
+      const li = document.createElement('li');
+      li.className = 'rt-item' + (done?' done':'');
+      li.innerHTML = `<span class="rt-check ${done?'on':''}"></span><span class="rt-text">${escapeHtml(it.text)}</span><button class="rt-del">✕</button>`;
+      li.querySelector('.rt-check').addEventListener('click', ()=> toggleDone(it.id));
+      li.querySelector('.rt-text').addEventListener('click', ()=> toggleDone(it.id));
+      li.querySelector('.rt-del').addEventListener('click', (e)=>{ e.stopPropagation(); items = items.filter(x=>x.id!==it.id); renderRoutine(); });
+      list.appendChild(li);
+    });
+    const pct = periodItems.length ? Math.round(doneCount/periodItems.length*100) : 0;
+    document.getElementById(pctElId).textContent = pct + '%';
+    document.getElementById(subElId).textContent = `${doneCount}/${periodItems.length} việc`;
+  }
+
+  function renderRoutine(){
+    renderList('morning', 'rtMorningList', 'rtMorningPct', 'rtMorningSub');
+    renderList('evening', 'rtEveningList', 'rtEveningPct', 'rtEveningSub');
+  }
+
+  function addItem(period, inputId){
+    const input = document.getElementById(inputId);
+    const text = input.value.trim();
+    if(!text) return;
+    items.push({ id:'rt'+(rtSeq++), period, text });
+    input.value = '';
+    renderRoutine();
+  }
+  document.getElementById('rtMorningAddBtn').addEventListener('click', ()=> addItem('morning','rtMorningInput'));
+  document.getElementById('rtMorningInput').addEventListener('keydown', e=>{ if(e.key==='Enter') addItem('morning','rtMorningInput'); });
+  document.getElementById('rtEveningAddBtn').addEventListener('click', ()=> addItem('evening','rtEveningInput'));
+  document.getElementById('rtEveningInput').addEventListener('keydown', e=>{ if(e.key==='Enter') addItem('evening','rtEveningInput'); });
+
+  window.renderRoutine = renderRoutine;
+  window.__routine = {
+    exportData(){ return { items, completions }; },
+    importData(d){
+      items = Array.isArray(d.items) ? d.items : [];
+      completions = (d.completions && typeof d.completions==='object') ? d.completions : {};
+      const maxR = items.reduce((m,it)=>{ const n=parseInt(String(it.id).replace('rt',''),10); return isNaN(n)?m:Math.max(m,n); }, 0);
+      rtSeq = maxR+1;
+      renderRoutine();
+    }
+  };
+  renderRoutine();
+})();
+
+// ================= HỌC TẬP & KỸ NĂNG =================
+(function(){
+  function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function todayIso(){ return new Date().toISOString().slice(0,10); }
+  function formatVN(iso){ if(!iso) return ''; const [y,m,d]=iso.split('-'); return `${d}/${m}/${y}`; }
+
+  let goals = []; // {id, name, type, status, deadline, milestones:[{id,text,done}], note, examDate, targetScore, actualScore, cost}
+  let lgSeq = 1, msSeq = 1;
+  let editingLgId = null;
+  let lgFilter = 'all';
+  let draftMilestones = []; // mốc đang chỉnh trong modal (chưa lưu vào goals)
+
+  function toastL(text, icon){
+    const host = document.getElementById('toastHost');
+    const el = document.createElement('div');
+    el.className = 'glass toast';
+    el.innerHTML = `<span class="t-ic">${icon||'📚'}</span><span>${text}</span>`;
+    host.appendChild(el);
+    setTimeout(()=>{ el.style.opacity='0'; el.style.transition='opacity .4s ease'; setTimeout(()=>el.remove(),400); }, 3400);
+  }
+  function percentOf(g){
+    if(!g.milestones || g.milestones.length===0) return 0;
+    return Math.round(g.milestones.filter(m=>m.done).length / g.milestones.length * 100);
+  }
+  // Nhật ký thời gian học — tự lấy từ dữ liệu phiên tập trung của Digital Workspace,
+  // khớp theo đúng tên mục tiêu (tên task lúc bấm Pomodoro trùng tên mục tiêu học tập).
+  function studyStats(goalName){
+    const log = (window.__ws && window.__ws.focusLog) ? window.__ws.focusLog : [];
+    const matched = log.filter(r=>r.completed && r.task_text && r.task_text.trim().toLowerCase()===goalName.trim().toLowerCase());
+    const totalSeconds = matched.reduce((s,r)=>s+r.actual_seconds,0);
+    const dates = new Set(matched.map(r=>r.started_at.slice(0,10)));
+    let streak=0; let cursor=new Date();
+    while(dates.has(cursor.toISOString().slice(0,10))){ streak++; cursor.setDate(cursor.getDate()-1); }
+    return { hours: totalSeconds/3600, sessions: matched.length, streak };
+  }
+  function deadlineChip(deadline){
+    if(!deadline) return '';
+    const days = Math.round((new Date(deadline) - new Date(todayIso())) / 86400000);
+    if(days < 0) return `<span class="meta-tag" style="color:var(--danger);">⚠ Trễ ${-days} ngày</span>`;
+    if(days === 0) return `<span class="meta-tag" style="color:var(--accent);">📅 Hạn hôm nay</span>`;
+    return `<span class="meta-tag">📅 còn ${days} ngày</span>`;
+  }
+
+  function renderLearning(){
+    const list = document.getElementById('lgList');
+    const filtered = lgFilter==='all' ? goals : goals.filter(g=>g.type===lgFilter);
+    if(filtered.length===0){ list.innerHTML = '<div class="empty-hint">Chưa có mục tiêu nào — bấm "+ Thêm mục tiêu" nhé.</div>'; return; }
+    const sorted = [...filtered].sort((a,b)=> percentOf(b) - percentOf(a));
+    list.innerHTML = '';
+    sorted.forEach(g=>{
+      const pct = percentOf(g);
+      const stats = studyStats(g.name);
+      const card = document.createElement('div');
+      card.className = 'lg-card';
+      const certLine = g.type==='Chứng chỉ' && (g.examDate || g.targetScore)
+        ? `<div class="lg-note">🎓 Thi: ${g.examDate?formatVN(g.examDate):'chưa đặt lịch'}${g.targetScore?` · Mục tiêu ${escapeHtml(g.targetScore)}`:''}${g.actualScore?` · Đạt ${escapeHtml(g.actualScore)}`:''}</div>`
+        : '';
+      card.innerHTML = `
+        <div class="lg-card-top">
+          <span class="lg-type-badge">${escapeHtml(g.type)}</span>
+          <span class="lg-name">${escapeHtml(g.name)}</span>
+          <span class="meta-tag">${escapeHtml(g.status)}</span>
+          ${deadlineChip(g.deadline)}
+          <span class="lg-percent">${pct}%</span>
+        </div>
+        <div class="urgency-bar-track"><span class="urgency-bar-fill critical" style="width:${pct}%; background:var(--accent);"></span></div>
+        <div class="lg-note">🕐 Đã học ${stats.hours.toFixed(1)}h (${stats.sessions} phiên)${stats.streak>0?` · 🔥 chuỗi ${stats.streak} ngày`:''} · ${g.milestones.length} mốc (${g.milestones.filter(m=>m.done).length} đã xong)</div>
+        ${certLine}
+        ${g.note ? `<div class="lg-note">📝 ${escapeHtml(g.note)}</div>` : ''}`;
+      card.addEventListener('click', ()=> openLgEdit(g.id));
+      list.appendChild(card);
+    });
+  }
+  document.querySelectorAll('.filter-chip[data-lgtype]').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      document.querySelectorAll('.filter-chip[data-lgtype]').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      lgFilter = chip.dataset.lgtype;
+      renderLearning();
+    });
+  });
+
+  // ---------- Quản lý mốc/chương trong modal ----------
+  function renderDraftMilestones(){
+    const wrap = document.getElementById('lgMilestoneList');
+    if(draftMilestones.length===0){ wrap.innerHTML = '<div class="empty-hint" style="margin:0;">Chưa có mốc nào.</div>'; return; }
+    wrap.innerHTML = '';
+    draftMilestones.forEach(m=>{
+      const row = document.createElement('div');
+      row.className = 'rt-item';
+      row.style.background = 'var(--glass)';
+      row.innerHTML = `<span class="rt-check ${m.done?'on':''}"></span><span class="rt-text">${escapeHtml(m.text)}</span><button class="rt-del">✕</button>`;
+      row.querySelector('.rt-check').addEventListener('click', ()=>{ m.done=!m.done; renderDraftMilestones(); });
+      row.querySelector('.rt-del').addEventListener('click', ()=>{ draftMilestones = draftMilestones.filter(x=>x.id!==m.id); renderDraftMilestones(); });
+      wrap.appendChild(row);
+    });
+  }
+  document.getElementById('lgMilestoneAddBtn').addEventListener('click', ()=>{
+    const input = document.getElementById('lgMilestoneInput');
+    const text = input.value.trim();
+    if(!text) return;
+    draftMilestones.push({ id:'ms'+(msSeq++), text, done:false });
+    input.value = '';
+    renderDraftMilestones();
+  });
+  document.getElementById('lgMilestoneInput').addEventListener('keydown', e=>{ if(e.key==='Enter') document.getElementById('lgMilestoneAddBtn').click(); });
+
+  function toggleCertFields(){
+    document.getElementById('lgCertFields').style.display = document.getElementById('lgType').value==='Chứng chỉ' ? 'block' : 'none';
+  }
+  document.getElementById('lgType').addEventListener('change', toggleCertFields);
+
+  const lgModal = document.getElementById('lgModalBackdrop');
+  document.getElementById('lgOpenAdd').addEventListener('click', ()=>{
+    editingLgId = null;
+    draftMilestones = [];
+    document.getElementById('lgModalTitle').textContent = 'Thêm mục tiêu học tập';
+    document.getElementById('lgSave').textContent = 'Thêm mục tiêu';
+    document.getElementById('lgDelete').style.display = 'none';
+    document.getElementById('lgStatsBox').style.display = 'none';
+    document.getElementById('lgName').value = '';
+    document.getElementById('lgType').value = 'Khóa học';
+    document.getElementById('lgStatus').value = 'Chưa bắt đầu';
+    document.getElementById('lgDeadline').value = '';
+    document.getElementById('lgExamDate').value = '';
+    document.getElementById('lgTargetScore').value = '';
+    document.getElementById('lgActualScore').value = '';
+    document.getElementById('lgCost').value = '';
+    document.getElementById('lgNote').value = '';
+    toggleCertFields();
+    renderDraftMilestones();
+    lgModal.classList.add('show');
+  });
+  function openLgEdit(id){
+    const g = goals.find(x=>x.id===id);
+    if(!g) return;
+    editingLgId = id;
+    draftMilestones = g.milestones.map(m=>({...m}));
+    document.getElementById('lgModalTitle').textContent = 'Sửa mục tiêu';
+    document.getElementById('lgSave').textContent = 'Lưu thay đổi';
+    document.getElementById('lgDelete').style.display = 'inline-block';
+    document.getElementById('lgName').value = g.name;
+    document.getElementById('lgType').value = g.type;
+    document.getElementById('lgStatus').value = g.status;
+    document.getElementById('lgDeadline').value = g.deadline || '';
+    document.getElementById('lgExamDate').value = g.examDate || '';
+    document.getElementById('lgTargetScore').value = g.targetScore || '';
+    document.getElementById('lgActualScore').value = g.actualScore || '';
+    document.getElementById('lgCost').value = g.cost || '';
+    document.getElementById('lgNote').value = g.note || '';
+    toggleCertFields();
+    renderDraftMilestones();
+    const stats = studyStats(g.name);
+    document.getElementById('lgHoursStudied').textContent = stats.hours.toFixed(1);
+    document.getElementById('lgSessionCount').textContent = stats.sessions;
+    document.getElementById('lgStreak').textContent = stats.streak;
+    document.getElementById('lgStatsBox').style.display = 'block';
+    lgModal.classList.add('show');
+  }
+  document.getElementById('lgCancel').addEventListener('click', ()=> lgModal.classList.remove('show'));
+  lgModal.addEventListener('click', e=>{ if(e.target===lgModal) lgModal.classList.remove('show'); });
+  document.getElementById('lgDelete').addEventListener('click', ()=>{
+    if(!editingLgId) return;
+    goals = goals.filter(x=>x.id!==editingLgId);
+    lgModal.classList.remove('show');
+    renderLearning();
+    toastL('Đã xóa mục tiêu.', '🗑️');
+  });
+  document.getElementById('lgSave').addEventListener('click', ()=>{
+    const name = document.getElementById('lgName').value.trim();
+    if(!name){ toastL('Nhập tên mục tiêu nhé.', '⚠'); return; }
+    const data = {
+      name, type: document.getElementById('lgType').value,
+      status: document.getElementById('lgStatus').value,
+      deadline: document.getElementById('lgDeadline').value || null,
+      milestones: draftMilestones,
+      examDate: document.getElementById('lgExamDate').value || null,
+      targetScore: document.getElementById('lgTargetScore').value.trim(),
+      actualScore: document.getElementById('lgActualScore').value.trim(),
+      cost: document.getElementById('lgCost').value.trim(),
+      note: document.getElementById('lgNote').value.trim()
+    };
+    if(editingLgId){
+      const g = goals.find(x=>x.id===editingLgId);
+      if(g) Object.assign(g, data);
+      toastL('Đã lưu thay đổi.', '📚');
+    } else {
+      goals.push({ id:'lg'+(lgSeq++), ...data });
+      toastL('Đã thêm mục tiêu mới.', '📚');
+    }
+    lgModal.classList.remove('show');
+    renderLearning();
+  });
+  attachDateShortcuts('lgDeadline');
+  attachDateShortcuts('lgExamDate');
+
+  window.renderLearning = renderLearning;
+  window.__learning = {
+    exportData(){ return { goals }; },
+    importData(d){
+      goals = Array.isArray(d.goals) ? d.goals.map(g=>({ milestones:[], status:'Chưa bắt đầu', ...g })) : [];
+      const maxL = goals.reduce((m,g)=>{ const n=parseInt(String(g.id).replace('lg',''),10); return isNaN(n)?m:Math.max(m,n); }, 0);
+      lgSeq = maxL+1;
+      renderLearning();
+    }
+  };
+  renderLearning();
+})();
+
+// ================= MONTHLY (việc định kỳ không cố định ngày) =================
+(function(){
+  function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function todayIso(){ return new Date().toISOString().slice(0,10); }
+  function formatVN(iso){ const [y,m,d]=iso.split('-'); return `${d}/${m}/${y}`; }
+
+  let items = []; // {id, name, intervalMonths, lastDate}
+  let moSeq = 1;
+  let editingMoId = null;
+
+  function toastMo(text, icon){
+    const host = document.getElementById('toastHost');
+    const el = document.createElement('div');
+    el.className = 'glass toast';
+    el.innerHTML = `<span class="t-ic">${icon||'🔁'}</span><span>${text}</span>`;
+    host.appendChild(el);
+    setTimeout(()=>{ el.style.opacity='0'; el.style.transition='opacity .4s ease'; setTimeout(()=>el.remove(),400); }, 3400);
+  }
+  function daysSince(iso){ return Math.floor((new Date(todayIso()) - new Date(iso)) / 86400000); }
+
+  function renderMonthly(){
+    const list = document.getElementById('moList');
+    if(items.length===0){ list.innerHTML = '<div class="empty-hint">Chưa có việc định kỳ nào — bấm "+ Thêm việc định kỳ" nhé.</div>'; return; }
+    const sorted = [...items].sort((a,b)=>{
+      const da = daysSince(a.lastDate) - a.intervalMonths*30;
+      const db = daysSince(b.lastDate) - b.intervalMonths*30;
+      return db - da;
+    });
+    list.innerHTML = '';
+    sorted.forEach(it=>{
+      const elapsedDays = daysSince(it.lastDate);
+      const elapsedMonths = (elapsedDays/30);
+      const overdue = elapsedMonths >= it.intervalMonths;
+      const card = document.createElement('div');
+      card.className = 'mo-card' + (overdue?' overdue':'');
+      const monthsText = elapsedMonths >= 1 ? `${elapsedMonths.toFixed(1)} tháng` : `${elapsedDays} ngày`;
+      card.innerHTML = `
+        <div class="mo-info">
+          <div class="mo-name">${escapeHtml(it.name)}</div>
+          <div class="mo-sub">${overdue?'⚠ Quá hạn — ':''}Đã ${monthsText} chưa làm (chu kỳ ${it.intervalMonths} tháng) · lần cuối ${formatVN(it.lastDate)}</div>
+        </div>
+        <button class="btn btn-sm btn-primary mo-done-btn">✅ Đã làm hôm nay</button>`;
+      card.querySelector('.mo-info').addEventListener('click', ()=> openMoEdit(it.id));
+      card.querySelector('.mo-done-btn').addEventListener('click', (e)=>{
+        e.stopPropagation();
+        it.lastDate = todayIso();
+        renderMonthly();
+        toastMo('Đã đánh dấu vừa làm "' + it.name + '".', '✅');
+      });
+      list.appendChild(card);
+    });
+  }
+
+  const moModal = document.getElementById('moModalBackdrop');
+  document.getElementById('moOpenAdd').addEventListener('click', ()=>{
+    editingMoId = null;
+    document.getElementById('moModalTitle').textContent = 'Thêm việc định kỳ';
+    document.getElementById('moSave').textContent = 'Thêm';
+    document.getElementById('moDelete').style.display = 'none';
+    document.getElementById('moName').value = '';
+    document.getElementById('moInterval').value = '';
+    document.getElementById('moLastDate').value = todayIso();
+    moModal.classList.add('show');
+  });
+  function openMoEdit(id){
+    const it = items.find(x=>x.id===id);
+    if(!it) return;
+    editingMoId = id;
+    document.getElementById('moModalTitle').textContent = 'Sửa việc định kỳ';
+    document.getElementById('moSave').textContent = 'Lưu thay đổi';
+    document.getElementById('moDelete').style.display = 'inline-block';
+    document.getElementById('moName').value = it.name;
+    document.getElementById('moInterval').value = it.intervalMonths;
+    document.getElementById('moLastDate').value = it.lastDate;
+    moModal.classList.add('show');
+  }
+  document.getElementById('moCancel').addEventListener('click', ()=> moModal.classList.remove('show'));
+  moModal.addEventListener('click', e=>{ if(e.target===moModal) moModal.classList.remove('show'); });
+  document.getElementById('moDelete').addEventListener('click', ()=>{
+    if(!editingMoId) return;
+    items = items.filter(x=>x.id!==editingMoId);
+    moModal.classList.remove('show');
+    renderMonthly();
+    toastMo('Đã xóa.', '🗑️');
+  });
+  document.getElementById('moSave').addEventListener('click', ()=>{
+    const name = document.getElementById('moName').value.trim();
+    const intervalMonths = parseFloat(document.getElementById('moInterval').value) || 0;
+    const lastDate = document.getElementById('moLastDate').value || todayIso();
+    if(!name || intervalMonths<=0){ toastMo('Nhập tên và chu kỳ hợp lệ nhé.', '⚠'); return; }
+    if(editingMoId){
+      const it = items.find(x=>x.id===editingMoId);
+      if(it){ it.name=name; it.intervalMonths=intervalMonths; it.lastDate=lastDate; }
+      toastMo('Đã lưu thay đổi.', '🔁');
+    } else {
+      items.push({ id:'mo'+(moSeq++), name, intervalMonths, lastDate });
+      toastMo('Đã thêm việc định kỳ.', '🔁');
+    }
+    moModal.classList.remove('show');
+    renderMonthly();
+  });
+  attachDateShortcuts('moLastDate');
+
+  window.renderMonthly = renderMonthly;
+  window.__monthly = {
+    exportData(){ return { items }; },
+    importData(d){
+      items = Array.isArray(d.items) ? d.items : [];
+      const maxM = items.reduce((m,it)=>{ const n=parseInt(String(it.id).replace('mo',''),10); return isNaN(n)?m:Math.max(m,n); }, 0);
+      moSeq = maxM+1;
+      renderMonthly();
+    }
+  };
+  renderMonthly();
 })();
 
 // ================= ĐĂNG KÝ SERVICE WORKER (cài đặt PWA + chạy offline) =================
